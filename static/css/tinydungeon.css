@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'tinydungeon';
+  src:  url('../fonts/tinydungeon.eot?ars828');
+  src:  url('../fonts/tinydungeon.eot?ars828#iefix') format('embedded-opentype'),
+    url('../fonts/tinydungeon.ttf?ars828') format('truetype'),
+    url('../fonts/tinydungeon.woff?ars828') format('woff'),
+    url('../fonts/tinydungeon.svg?ars828#tinydungeon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="tinydungeon-"], [class*=" tinydungeon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'tinydungeon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tinydungeon-mountain:before {
+  content: "\e900";
+}
+.tinydungeon-pot:before {
+  content: "\e901";
+}
+.tinydungeon-cross:before {
+  content: "\e902";
+}
+.tinydungeon-house:before {
+  content: "\e903";
+}
+.tinydungeon-sword:before {
+  content: "\e904";
+}
+.tinydungeon-flags:before {
+  content: "\e905";
+}
+.tinydungeon-die:before {
+  content: "\e906";
+}
+.tinydungeon-axe:before {
+  content: "\e907";
+}
+.tinydungeon-hammer:before {
+  content: "\e908";
+}
+.tinydungeon-castle:before {
+  content: "\e909";
+}
+.tinydungeon-cactus:before {
+  content: "\e90a";
+}
+.tinydungeon-star:before {
+  content: "\e90b";
+}
+.tinydungeon-monster:before {
+  content: "\e90c";
+}
+.tinydungeon-face:before {
+  content: "\e90d";
+}
+.tinydungeon-shine:before {
+  content: "\e90e";
+}
+.tinydungeon-box:before {
+  content: "\e90f";
+}
+.tinydungeon-person:before {
+  content: "\e910";
+}

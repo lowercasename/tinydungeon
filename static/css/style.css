@@ -1,0 +1,507 @@
+
+
+
+body {
+  font-family: "Ubuntu Mono", monospace;
+	display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+header, main, footer {
+		padding:0 10px;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+		background: black;
+		color: white;
+		text-align: center;
+}
+
+footer a, footer a:visited, footer a:active, footer a:hover {
+		color: white;
+		background: none;
+		text-decoration: underline;
+}
+
+a, a:active, a:visited {
+		text-decoration: none;
+		background: #ffff7f;
+		padding: 0 2px;
+		border-radius: 5px;
+		color: black;
+}
+
+a:hover {
+		background: #e1f9ff;
+		color: black;
+}
+
+
+#map-grid {
+	width: 800px;
+	border: 1px solid #dddddd;
+	overflow: scroll;
+}
+
+#map-grid-container {
+	width: 100%;
+	overflow: scroll;
+}
+
+#map-grid .grid-row {
+	height: 25px;
+	display: flex;
+	align-content: flex-start;
+}
+
+#map-grid .grid-row .grid-cell {
+	box-sizing: border-box;
+	height: 25px;
+	width: 25px;
+	border: 1px solid #d7e6f0;
+	cursor: pointer;
+	min-width: 25px;
+	min-height: 25px;
+}
+
+.column-index, .row-index {
+	box-sizing: border-box;
+	height: 25px;
+	width: 25px;
+	border: 1px solid #d7e6f0;
+	text-align: center;
+	line-height: 25px;
+	font-size: smaller;
+	color: #666;
+	min-width: 25px;
+	min-height: 25px;
+}
+#map-grid .grid-row .grid-cell.color-white {
+	background-color: #fff;
+}
+
+#map-grid .grid-row .grid-cell.color-black {
+	background-color: #2f86ba;
+}
+
+#map-grid .grid-row .grid-cell.color-door {
+	background-color: #fff;
+	background: url(../images/door-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-stairs {
+	background-color: #fff;
+	background: url(../images/stairs-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-column {
+	background-color: #fff;
+	background: url(../images/column-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-chest {
+	background-color: #fff;
+	background: url(../images/chest-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-statue {
+	background-color: #fff;
+	background: url(../images/statue-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-terrain {
+	background-color: #fff;
+	background: url(../images/terrain-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-rocks {
+	background-color: #fff;
+	background: url(../images/rocks-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-box {
+	background-color: #fff;
+	background: url(../images/box-icon.gif);
+}
+#map-grid .grid-row .grid-cell.color-secret {
+	background-color: #fff;
+	background: url(../images/secret-icon.gif);
+}
+
+#map-controls, #map-participant-controls {
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+#map-controls, #map-participant-controls {
+	background: #eee;
+	padding: 5px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	display: flex;
+  align-items: center;
+	flex-wrap: wrap;
+}
+
+#map-controls label, #map-participant-controls label {
+	padding-right: 0.25rem;
+}
+
+#map-controls label > input, #map-participant-controls label > input { /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+#map-controls label > input + img { /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+#map-controls label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
+	border: 2px solid orange;
+	border-radius: 3px;
+}
+
+#map-participant-controls label > input + .participant-color {
+	cursor:pointer;
+  border:2px solid transparent;
+	height: 23px;
+	width: 23px;
+	display: inline-block;
+	margin-right: 10px;
+	line-height: 23px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.3em;
+	border-radius: 50%;
+	background-color: #f8f7f3;
+}
+
+#map-participant-controls label > input:checked + .participant-color {
+	border:2px solid black;
+}
+
+.pog {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    left: 2px;
+    font-weight: bold;
+		box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sp-preview {
+	width: 15px;
+	height: 15px;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse;
+	table-layout: fixed;
+	border-bottom: 1px solid #ccc;
+}
+/* Zebra striping */
+tr:nth-of-type(4n-1) { 
+  background: #eee; 
+}
+
+tr.toggle-row td {
+	padding: 0;
+	border-top: 0;
+	border-bottom: 0;
+	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.2);
+	background: #f7f7f7;
+}
+
+tr.toggle-row .stats-container {
+	padding: 6px;
+	display: flex;
+	justify-content: space-between;
+}
+
+tr.toggle-row .stats-container .editable-container.editable-inline {
+	width: auto;
+}
+
+.toggle-container {
+	display: none;
+}
+
+.stats-container ul {
+	  list-style-type: none;
+    margin: 0;
+    padding: 0;
+/*		min-width: 16%;*/
+}
+.stats-container ul.monster-info {
+	width: 60%;
+}
+
+.stats-container ul.stats, .stats-container ul.other {
+	min-width: 10%;
+	max-width: 20%;
+}
+
+.stats-container ul.monster-info h2 {
+	font-size: 1rem;
+  text-decoration: underline;
+	margin-top:0;
+	margin-bottom: 0.5rem;
+}
+
+/*
+.stats-container ul:nth-of-type(1){
+	margin-right: 2rem;
+}
+*/
+
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+	position: relative;
+}
+
+.hpbar {
+	max-width: 100%;
+  display: block;
+  background: #11a911;
+  width: 100%;
+  color: white;
+  text-align: center;
+	border-radius: 4px;
+	box-sizing: border-box;
+	border: 1px solid #7bdc7b;
+}
+
+.hpbarborder {
+		width: 100%;
+		background: #cccccc;
+		box-shadow: inset -1px 1px 1px rgba(0,0,0,0.2);
+		border-radius: 6px;
+		border: 2px solid #959595;
+	  margin-left: -2px;
+}
+
+.notes-edit-field {
+	font-size: smaller;
+	height:2rem;
+	width: 100%;
+}
+
+.notes + .editable-container .editable-input, .notes + .editable-container {
+	width: 100%;
+}
+
+.col-left {
+	float: left;
+	width: 50%;
+	height: 240px;
+}
+.col-right {
+	float: right;
+	width: 50%;
+	height: 240px;
+}
+
+
+#members-list a {
+		color: black;
+		border-bottom: 1px dashed darkgrey;
+		background: none;
+		padding: 0;
+		border-radius: 0px;
+}
+
+.editable-demo {
+		border-bottom: 1px dashed darkgrey;
+}
+
+#members-list .hpbar a {
+		color: white;
+		font-weight: bold;
+		border-bottom: 0px;
+}
+
+#members-list .member-controls a {
+		border-bottom: 0px;
+		text-decoration: none;
+}
+
+.input-mini {
+		width: 40px;
+}
+
+.editable-buttons button {
+		display: none;
+}
+
+.notes {
+	font-size: smaller;
+}
+
+hr {
+	border: 0px;
+	height: 1px;
+	background: #cecece;
+}
+
+.member-controls {
+			align-items: center;
+}
+
+.delete-member:hover span {
+		color: red;
+}
+
+#dice-documentation {
+		display: none;
+}
+
+code {
+		background: #e0e0e0;
+		font-family: inherit;
+		padding: 0px 2px;
+}
+
+#dice-result, #dice-documentation {
+		background: #eee;
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 600px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+	.col-left {
+		width:100%;
+		height: auto;
+	}
+	.col-right {
+		width:100%;
+		height: auto;
+		margin-bottom: 1rem;
+	}
+	
+	tr.toggle-row .stats-container {
+		padding: 6px;
+		display: block;
+		justify-content: none;
+/*		justify-content: space-between;*/
+	}
+	
+	.stats-container ul {
+		margin-right: 0;
+		margin-bottom: 1rem;
+	}
+	
+	.stats-container ul.monster-info, .stats-container ul.stats, .stats-container ul.other {
+		width: 100%;
+		max-width: 100%;
+		min-width: 100%;
+	}
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+		}
+		table {
+				table-layout: auto;
+		}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	.main-row td:nth-of-type(1):before { content: "Name"; font-weight: bold; max-width:30%; }
+	td:nth-of-type(2):before { content: "Initiative"; font-weight: bold; }
+	td:nth-of-type(3):before { content: "AC"; font-weight: bold; }
+	td:nth-of-type(4):before { content: "HP"; font-weight: bold; }
+	td:nth-of-type(5):before { content: "Current HP"; font-weight: bold; }
+	td:nth-of-type(6):before { content: "Notes"; font-weight: bold; }
+	td:nth-of-type(7):before { content: "Controls"; font-weight: bold; }
+}
+
+
+.editable-input input {
+    background: none;
+    border: 0px;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    display: block;
+    margin-top: 1px;
+		font-weight: bold;
+}
+
+.chp-edit-field {
+	text-align: center;
+	color: white;
+	width: 100%;
+} 
+/*
+
+.editable-input textarea {
+    background: none;
+    border: 0px;
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+     font-weight: bold; 
+}
+*/
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}

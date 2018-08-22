@@ -1,0 +1,977 @@
+[
+  {
+    "Name": "Aboleth"
+  },
+  {
+    "Name": "Acolyte"
+  },
+  {
+    "Name": "Adult Black Dragon"
+  },
+  {
+    "Name": "Adult Blue Dracolich"
+  },
+  {
+    "Name": "Adult Blue Dragon"
+  },
+  {
+    "Name": "Adult Brass Dragon"
+  },
+  {
+    "Name": "Adult Bronze Dragon"
+  },
+  {
+    "Name": "Adult Copper Dragon"
+  },
+  {
+    "Name": "Adult Gold Dragon"
+  },
+  {
+    "Name": "Adult Green Dragon"
+  },
+  {
+    "Name": "Adult Red Dragon"
+  },
+  {
+    "Name": "Adult Silver Dragon"
+  },
+  {
+    "Name": "Adult White Dragon"
+  },
+  {
+    "Name": "Air Elemental"
+  },
+  {
+    "Name": "Ancient Black Dragon"
+  },
+  {
+    "Name": "Ancient Blue Dragon"
+  },
+  {
+    "Name": "Ancient Brass Dragon"
+  },
+  {
+    "Name": "Ancient Bronze Dragon"
+  },
+  {
+    "Name": "Ancient Copper Dragon"
+  },
+  {
+    "Name": "Ancient Gold Dragon"
+  },
+  {
+    "Name": "Ancient Green Dragon"
+  },
+  {
+    "Name": "Ancient Red Dragon"
+  },
+  {
+    "Name": "Ancient Silver Dragon"
+  },
+  {
+    "Name": "Ancient White Dragon"
+  },
+  {
+    "Name": "Androsphinx"
+  },
+  {
+    "Name": "Animated Armor"
+  },
+  {
+    "Name": "Ankheg"
+  },
+  {
+    "Name": "Ape"
+  },
+  {
+    "Name": "Archmage"
+  },
+  {
+    "Name": "Assassin"
+  },
+  {
+    "Name": "Awakened Shrub"
+  },
+  {
+    "Name": "Awakened Tree"
+  },
+  {
+    "Name": "Axe Beak"
+  },
+  {
+    "Name": "Azer"
+  },
+  {
+    "Name": "Baboon"
+  },
+  {
+    "Name": "Badger"
+  },
+  {
+    "Name": "Balor"
+  },
+  {
+    "Name": "Bandit"
+  },
+  {
+    "Name": "Bandit Captain"
+  },
+  {
+    "Name": "Barbed Devil"
+  },
+  {
+    "Name": "Basilisk"
+  },
+  {
+    "Name": "Bat"
+  },
+  {
+    "Name": "Bearded Devil"
+  },
+  {
+    "Name": "Behir"
+  },
+  {
+    "Name": "Berserker"
+  },
+  {
+    "Name": "Black Bear"
+  },
+  {
+    "Name": "Black Dragon Wyrmling"
+  },
+  {
+    "Name": "Black Pudding"
+  },
+  {
+    "Name": "Blink Dog"
+  },
+  {
+    "Name": "Blood Hawk"
+  },
+  {
+    "Name": "Blue Dragon Wyrmling"
+  },
+  {
+    "Name": "Boar"
+  },
+  {
+    "Name": "Bone Devil"
+  },
+  {
+    "Name": "Brass Dragon Wyrmling"
+  },
+  {
+    "Name": "Bronze Dragon Wyrmling"
+  },
+  {
+    "Name": "Brown Bear"
+  },
+  {
+    "Name": "Bugbear"
+  },
+  {
+    "Name": "Bulette"
+  },
+  {
+    "Name": "Camel"
+  },
+  {
+    "Name": "Carrion Crawler"
+  },
+  {
+    "Name": "Cat"
+  },
+  {
+    "Name": "Cave Bear"
+  },
+  {
+    "Name": "Centaur"
+  },
+  {
+    "Name": "Chain Devil"
+  },
+  {
+    "Name": "Chimera"
+  },
+  {
+    "Name": "Chuul"
+  },
+  {
+    "Name": "Clay Golem"
+  },
+  {
+    "Name": "Cloaker"
+  },
+  {
+    "Name": "Cloud Giant"
+  },
+  {
+    "Name": "Cockatrice"
+  },
+  {
+    "Name": "Commoner"
+  },
+  {
+    "Name": "Constrictor Snake"
+  },
+  {
+    "Name": "Copper Dragon Wyrmling"
+  },
+  {
+    "Name": "Couatl"
+  },
+  {
+    "Name": "Crab"
+  },
+  {
+    "Name": "Crocodile"
+  },
+  {
+    "Name": "Cult Fanatic"
+  },
+  {
+    "Name": "Cultist"
+  },
+  {
+    "Name": "Darkmantle"
+  },
+  {
+    "Name": "Death Dog"
+  },
+  {
+    "Name": "Deep Gnome (Svirfneblin)"
+  },
+  {
+    "Name": "Deer"
+  },
+  {
+    "Name": "Deva"
+  },
+  {
+    "Name": "Dire Wolf"
+  },
+  {
+    "Name": "Djinni"
+  },
+  {
+    "Name": "Doppelganger"
+  },
+  {
+    "Name": "Draft Horse"
+  },
+  {
+    "Name": "Dragon Turtle"
+  },
+  {
+    "Name": "Dretch"
+  },
+  {
+    "Name": "Drider"
+  },
+  {
+    "Name": "Drow"
+  },
+  {
+    "Name": "Druid"
+  },
+  {
+    "Name": "Dryad"
+  },
+  {
+    "Name": "Duergar"
+  },
+  {
+    "Name": "Dust Mephit"
+  },
+  {
+    "Name": "Eagle"
+  },
+  {
+    "Name": "Earth Elemental"
+  },
+  {
+    "Name": "Efreeti"
+  },
+  {
+    "Name": "Elephant"
+  },
+  {
+    "Name": "Elk"
+  },
+  {
+    "Name": "Erinyes"
+  },
+  {
+    "Name": "Ettercap"
+  },
+  {
+    "Name": "Ettin"
+  },
+  {
+    "Name": "Fire Elemental"
+  },
+  {
+    "Name": "Fire Giant"
+  },
+  {
+    "Name": "Flesh Golem"
+  },
+  {
+    "Name": "Flying Snake"
+  },
+  {
+    "Name": "Flying Sword"
+  },
+  {
+    "Name": "Frog"
+  },
+  {
+    "Name": "Frost Giant"
+  },
+  {
+    "Name": "Gargoyle"
+  },
+  {
+    "Name": "Gelatinous Cube"
+  },
+  {
+    "Name": "Ghast"
+  },
+  {
+    "Name": "Ghost"
+  },
+  {
+    "Name": "Ghoul"
+  },
+  {
+    "Name": "Giant Ape"
+  },
+  {
+    "Name": "Giant Badger"
+  },
+  {
+    "Name": "Giant Bat"
+  },
+  {
+    "Name": "Giant Boar"
+  },
+  {
+    "Name": "Giant Centipede"
+  },
+  {
+    "Name": "Giant Constrictor Snake"
+  },
+  {
+    "Name": "Giant Crab"
+  },
+  {
+    "Name": "Giant Crocodile"
+  },
+  {
+    "Name": "Giant Eagle"
+  },
+  {
+    "Name": "Giant Elk"
+  },
+  {
+    "Name": "Giant Fire Beetle"
+  },
+  {
+    "Name": "Giant Frog"
+  },
+  {
+    "Name": "Giant Goat"
+  },
+  {
+    "Name": "Giant Hyena"
+  },
+  {
+    "Name": "Giant Lizard"
+  },
+  {
+    "Name": "Giant Octopus"
+  },
+  {
+    "Name": "Giant Owl"
+  },
+  {
+    "Name": "Giant Poisonous Snake"
+  },
+  {
+    "Name": "Giant Rat"
+  },
+  {
+    "Name": "Giant Rat (Diseased)"
+  },
+  {
+    "Name": "Giant Scorpion"
+  },
+  {
+    "Name": "Giant Sea Horse"
+  },
+  {
+    "Name": "Giant Shark"
+  },
+  {
+    "Name": "Giant Spider"
+  },
+  {
+    "Name": "Giant Toad"
+  },
+  {
+    "Name": "Giant Vulture"
+  },
+  {
+    "Name": "Giant Wasp"
+  },
+  {
+    "Name": "Giant Weasel"
+  },
+  {
+    "Name": "Giant Wolf Spider"
+  },
+  {
+    "Name": "Gibbering Mouther"
+  },
+  {
+    "Name": "Glabrezu"
+  },
+  {
+    "Name": "Gladiator"
+  },
+  {
+    "Name": "Gnoll"
+  },
+  {
+    "Name": "Goat"
+  },
+  {
+    "Name": "Goblin"
+  },
+  {
+    "Name": "Gold Dragon Wyrmling"
+  },
+  {
+    "Name": "Gorgon"
+  },
+  {
+    "Name": "Gray Ooze"
+  },
+  {
+    "Name": "Green Dragon Wyrmling"
+  },
+  {
+    "Name": "Green Hag"
+  },
+  {
+    "Name": "Grick"
+  },
+  {
+    "Name": "Griffon"
+  },
+  {
+    "Name": "Grimlock"
+  },
+  {
+    "Name": "Guard"
+  },
+  {
+    "Name": "Guardian Naga"
+  },
+  {
+    "Name": "Gynosphinx"
+  },
+  {
+    "Name": "Half-Red Dragon Veteran"
+  },
+  {
+    "Name": "Harpy"
+  },
+  {
+    "Name": "Hawk"
+  },
+  {
+    "Name": "Hell Hound"
+  },
+  {
+    "Name": "Hezrou"
+  },
+  {
+    "Name": "Hill Giant"
+  },
+  {
+    "Name": "Hippogriff"
+  },
+  {
+    "Name": "Hobgoblin"
+  },
+  {
+    "Name": "Homunculus"
+  },
+  {
+    "Name": "Horned Devil"
+  },
+  {
+    "Name": "Hunter Shark"
+  },
+  {
+    "Name": "Hydra"
+  },
+  {
+    "Name": "Hyena"
+  },
+  {
+    "Name": "Ice Devil"
+  },
+  {
+    "Name": "Ice Mephit"
+  },
+  {
+    "Name": "Imp"
+  },
+  {
+    "Name": "Invisible Stalker"
+  },
+  {
+    "Name": "Iron Golem"
+  },
+  {
+    "Name": "Jackal"
+  },
+  {
+    "Name": "Killer Whale"
+  },
+  {
+    "Name": "Knight"
+  },
+  {
+    "Name": "Kobold"
+  },
+  {
+    "Name": "Kraken"
+  },
+  {
+    "Name": "Lamia"
+  },
+  {
+    "Name": "Lemure"
+  },
+  {
+    "Name": "Lich"
+  },
+  {
+    "Name": "Lion"
+  },
+  {
+    "Name": "Lizard"
+  },
+  {
+    "Name": "Lizardfolk"
+  },
+  {
+    "Name": "Mage"
+  },
+  {
+    "Name": "Magma Mephit"
+  },
+  {
+    "Name": "Magmin"
+  },
+  {
+    "Name": "Mammoth"
+  },
+  {
+    "Name": "Manticore"
+  },
+  {
+    "Name": "Marilith"
+  },
+  {
+    "Name": "Mastiff"
+  },
+  {
+    "Name": "Medusa"
+  },
+  {
+    "Name": "Merfolk"
+  },
+  {
+    "Name": "Merrow"
+  },
+  {
+    "Name": "Mimic"
+  },
+  {
+    "Name": "Minotaur"
+  },
+  {
+    "Name": "Minotaur Skeleton"
+  },
+  {
+    "Name": "Mule"
+  },
+  {
+    "Name": "Mummy"
+  },
+  {
+    "Name": "Mummy Lord"
+  },
+  {
+    "Name": "Nalfeshnee"
+  },
+  {
+    "Name": "Night Hag"
+  },
+  {
+    "Name": "Nightmare"
+  },
+  {
+    "Name": "Noble"
+  },
+  {
+    "Name": "Ochre Jelly"
+  },
+  {
+    "Name": "Octopus"
+  },
+  {
+    "Name": "Ogre"
+  },
+  {
+    "Name": "Ogre Zombie"
+  },
+  {
+    "Name": "Oni"
+  },
+  {
+    "Name": "Orc"
+  },
+  {
+    "Name": "Otyugh"
+  },
+  {
+    "Name": "Owl"
+  },
+  {
+    "Name": "Owlbear"
+  },
+  {
+    "Name": "Panther"
+  },
+  {
+    "Name": "Pegasus"
+  },
+  {
+    "Name": "Phase Spider"
+  },
+  {
+    "Name": "Pit Fiend"
+  },
+  {
+    "Name": "Planetar"
+  },
+  {
+    "Name": "Plesiosaurus"
+  },
+  {
+    "Name": "Poisonous Snake"
+  },
+  {
+    "Name": "Polar Bear"
+  },
+  {
+    "Name": "Pony"
+  },
+  {
+    "Name": "Priest"
+  },
+  {
+    "Name": "Pseudodragon"
+  },
+  {
+    "Name": "Purple Worm"
+  },
+  {
+    "Name": "Quasit"
+  },
+  {
+    "Name": "Quipper"
+  },
+  {
+    "Name": "Rakshasa"
+  },
+  {
+    "Name": "Rat"
+  },
+  {
+    "Name": "Raven"
+  },
+  {
+    "Name": "Red Dragon Wyrmling"
+  },
+  {
+    "Name": "Reef Shark"
+  },
+  {
+    "Name": "Remorhaz"
+  },
+  {
+    "Name": "Rhinoceros"
+  },
+  {
+    "Name": "Riding Horse"
+  },
+  {
+    "Name": "Roc"
+  },
+  {
+    "Name": "Roper"
+  },
+  {
+    "Name": "Rug of Smothering"
+  },
+  {
+    "Name": "Rust Monster"
+  },
+  {
+    "Name": "Saber-Toothed Tiger"
+  },
+  {
+    "Name": "Sahuagin"
+  },
+  {
+    "Name": "Salamander"
+  },
+  {
+    "Name": "Satyr"
+  },
+  {
+    "Name": "Scorpion"
+  },
+  {
+    "Name": "Scout"
+  },
+  {
+    "Name": "Sea Hag"
+  },
+  {
+    "Name": "Sea Horse"
+  },
+  {
+    "Name": "Shadow"
+  },
+  {
+    "Name": "Shambling Mound"
+  },
+  {
+    "Name": "Shield Guardian"
+  },
+  {
+    "Name": "Shrieker"
+  },
+  {
+    "Name": "Silver Dragon Wyrmling"
+  },
+  {
+    "Name": "Skeleton"
+  },
+  {
+    "Name": "Solar"
+  },
+  {
+    "Name": "Specter"
+  },
+  {
+    "Name": "Spider"
+  },
+  {
+    "Name": "Spirit Naga"
+  },
+  {
+    "Name": "Sprite"
+  },
+  {
+    "Name": "Spy"
+  },
+  {
+    "Name": "Steam Mephit"
+  },
+  {
+    "Name": "Stirge"
+  },
+  {
+    "Name": "Stone Giant"
+  },
+  {
+    "Name": "Stone Golem"
+  },
+  {
+    "Name": "Storm Giant"
+  },
+  {
+    "Name": "Succubus/Incubus"
+  },
+  {
+    "Name": "Swarm of Bats"
+  },
+  {
+    "Name": "Swarm of Beetles"
+  },
+  {
+    "Name": "Swarm of Centipedes"
+  },
+  {
+    "Name": "Swarm of Insects"
+  },
+  {
+    "Name": "Swarm of Poisonous Snakes"
+  },
+  {
+    "Name": "Swarm of Quippers"
+  },
+  {
+    "Name": "Swarm of Rats"
+  },
+  {
+    "Name": "Swarm of Ravens"
+  },
+  {
+    "Name": "Swarm of Spiders"
+  },
+  {
+    "Name": "Swarm of Wasps"
+  },
+  {
+    "Name": "Tarrasque"
+  },
+  {
+    "Name": "Thug"
+  },
+  {
+    "Name": "Tiger"
+  },
+  {
+    "Name": "Treant"
+  },
+  {
+    "Name": "Tribal Warrior"
+  },
+  {
+    "Name": "Triceratops"
+  },
+  {
+    "Name": "Troll"
+  },
+  {
+    "Name": "Tyrannosaurus Rex"
+  },
+  {
+    "Name": "Unicorn"
+  },
+  {
+    "Name": "Vampire"
+  },
+  {
+    "Name": "Vampire Spawn"
+  },
+  {
+    "Name": "Veteran"
+  },
+  {
+    "Name": "Violet Fungus"
+  },
+  {
+    "Name": "Vrock"
+  },
+  {
+    "Name": "Vulture"
+  },
+  {
+    "Name": "Warhorse"
+  },
+  {
+    "Name": "Warhorse Skeleton"
+  },
+  {
+    "Name": "Water Elemental"
+  },
+  {
+    "Name": "Weasel"
+  },
+  {
+    "Name": "Werebear"
+  },
+  {
+    "Name": "Wereboar"
+  },
+  {
+    "Name": "Wererat"
+  },
+  {
+    "Name": "Weretiger"
+  },
+  {
+    "Name": "Werewolf"
+  },
+  {
+    "Name": "White Dragon Wyrmling"
+  },
+  {
+    "Name": "Wight"
+  },
+  {
+    "Name": "Will-o'-Wisp"
+  },
+  {
+    "Name": "Winter Wolf"
+  },
+  {
+    "Name": "Wolf"
+  },
+  {
+    "Name": "Worg"
+  },
+  {
+    "Name": "Wraith"
+  },
+  {
+    "Name": "Wyvern"
+  },
+  {
+    "Name": "Xorn"
+  },
+  {
+    "Name": "Young Black Dragon"
+  },
+  {
+    "Name": "Young Blue Dragon"
+  },
+  {
+    "Name": "Young Brass Dragon"
+  },
+  {
+    "Name": "Young Bronze Dragon"
+  },
+  {
+    "Name": "Young Copper Dragon"
+  },
+  {
+    "Name": "Young Gold Dragon"
+  },
+  {
+    "Name": "Young Green Dragon"
+  },
+  {
+    "Name": "Young Red Dragon"
+  },
+  {
+    "Name": "Young Silver Dragon"
+  },
+  {
+    "Name": "Young White Dragon"
+  },
+  {
+    "Name": "Zombie"
+  }
+]

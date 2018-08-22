@@ -1,0 +1,543 @@
+{
+  "IcoMoonType": "selection",
+  "icons": [
+    {
+      "icon": {
+        "paths": [
+          "M919.296 530.752l-90.496 90.496-181.024-181.024-90.496 90.496 90.496 90.496-90.496 90.496-181.024-181.024-181.024 181.024-90.496-90.496 271.52-271.52 90.496 90.496 181.024-180.992 271.52 271.552z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "climb",
+          "ascend",
+          "move",
+          "up"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 30,
+        "order": 12,
+        "prevSize": 32,
+        "code": 59648,
+        "name": "mountain"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 29
+    },
+    {
+      "icon": {
+        "paths": [
+          "M896 384v128h-128v384h-512v-384h-128v-128h128v-128h512v128h128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "cook",
+          "bake",
+          "eat",
+          "boil"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 36,
+        "order": 11,
+        "prevSize": 32,
+        "code": 59649,
+        "name": "pot"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 35
+    },
+    {
+      "icon": {
+        "paths": [
+          "M832 256v128h-256v512h-128v-512h-256v-128h256v-128h128v128h256z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "die",
+          "fail",
+          "depart",
+          "kill",
+          "resurrect",
+          "hang"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 46,
+        "order": 3,
+        "prevSize": 32,
+        "code": 59650,
+        "name": "cross"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 45
+    },
+    {
+      "icon": {
+        "paths": [
+          "M896 256v640h-768v-640l128-128 128 128v128h256v-128l128-128 128 128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "dream",
+          "believe",
+          "wonder",
+          "imagine",
+          "tower"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 50,
+        "order": 14,
+        "prevSize": 32,
+        "code": 59651,
+        "name": "house"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 49
+    },
+    {
+      "icon": {
+        "paths": [
+          "M466.752 647.776l90.496 90.496-90.496 90.496-90.496-90.496-90.496 90.496-90.496-90.496 90.496-90.496-90.496-90.496 90.496-90.496 90.496 90.496 362.016-362.080 90.496 90.496-362.016 362.080z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "fight",
+          "play",
+          "defend",
+          "arrest"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 61,
+        "order": 2,
+        "prevSize": 32,
+        "code": 59652,
+        "name": "sword"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 60
+    },
+    {
+      "icon": {
+        "paths": [
+          "M708.544 469.952l-112 112 159.52 159.52-90.496 90.528-159.52-159.52-159.552 159.52-90.496-90.496 159.52-159.52-112-112-90.496 90.496-181.024-181.024 181.024-181.024 293.024 293.024 293.024-293.024 181.024 181.024-181.024 181.024-90.528-90.528z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "finish",
+          "win",
+          "end",
+          "race",
+          "lose"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 64,
+        "order": 13,
+        "prevSize": 32,
+        "code": 59653,
+        "name": "flags"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 63
+    },
+    {
+      "icon": {
+        "paths": [
+          "M192 192v640h640v-640h-640zM448 704h-128v-128h128v128zM704 448h-128v-128h128v128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "gamble",
+          "play",
+          "win",
+          "roll",
+          "lose"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 69,
+        "order": 10,
+        "prevSize": 32,
+        "code": 59654,
+        "name": "die"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 68
+    },
+    {
+      "icon": {
+        "paths": [
+          "M969.6 400l-272 272-182.4-182.4-361.6 361.6-89.6-89.6 633.6-633.6 272 272z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "hack",
+          "chop",
+          "cut",
+          "slice",
+          "kill",
+          "sever"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 75,
+        "order": 4,
+        "prevSize": 32,
+        "code": 59655,
+        "name": "axe"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 74
+    },
+    {
+      "icon": {
+        "paths": [
+          "M838.4 902.4l-476.8-476.8-179.2 182.4-89.6-89.6 134.4-134.4-89.6-92.8 182.4-182.4 89.6 89.6 134.4-134.4 89.6 89.6-182.4 182.4 476.8 473.6-89.6 92.8z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "hammer",
+          "beat",
+          "kill",
+          "hit"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 76,
+        "order": 5,
+        "prevSize": 32,
+        "code": 59656,
+        "name": "hammer"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 75
+    },
+    {
+      "icon": {
+        "paths": [
+          "M896 128v768h-256v-256h-256v256h-256v-768h128v128h128v-128h256v128h128v-128h128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "home",
+          "go",
+          "return",
+          "dream",
+          "defend"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 79,
+        "order": 15,
+        "prevSize": 32,
+        "code": 59657,
+        "name": "castle"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 78
+    },
+    {
+      "icon": {
+        "paths": [
+          "M896 256v256h-256v384h-256v-128h-256v-256h128v128h128v-512h256v256h128v-128h128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "hurt",
+          "prick",
+          "stick",
+          "poke"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 80,
+        "order": 16,
+        "prevSize": 32,
+        "code": 59658,
+        "name": "cactus"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 79
+    },
+    {
+      "icon": {
+        "paths": [
+          "M874.048 512l-106.048 106.048v149.952h-149.952l-106.048 106.048-106.048-106.048h-149.952v-149.952l-106.048-106.048 106.048-106.048v-149.952h149.952l106.048-106.048 106.048 106.048h149.952v149.952l106.048 106.048z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "navigate",
+          "locate",
+          "travel",
+          "direct",
+          "steer",
+          "discovery"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 98,
+        "order": 9,
+        "prevSize": 32,
+        "code": 59659,
+        "name": "star"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 97
+    },
+    {
+      "icon": {
+        "paths": [
+          "M704 128v128h-384v-128h-128v768h640v-768h-128zM448 512h-128v-128h128v128zM704 512h-128v-128h128v128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "prank",
+          "scare",
+          "fear"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 109,
+        "order": 7,
+        "prevSize": 32,
+        "code": 59660,
+        "name": "monster"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 108
+    },
+    {
+      "icon": {
+        "paths": [
+          "M192 256v640h640v-640h-640zM448 512h-128v-128h128v128zM704 512h-128v-128h128v128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "scare",
+          "cry",
+          "prank"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 128,
+        "order": 6,
+        "prevSize": 32,
+        "code": 59661,
+        "name": "face"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 127
+    },
+    {
+      "icon": {
+        "paths": [
+          "M704 320v128h128v128h-128v128h-128v128h-128v-128h-128v-128h-128v-128h128v-128h128v-128h128v128h128zM832 832v-128h-128v128h128zM832 192h-128v128h128v-128zM192 192v128h128v-128h-128zM192 832h128v-128h-128v128z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "shine",
+          "sparkle",
+          "amaze"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 132,
+        "order": 8,
+        "prevSize": 32,
+        "code": 59662,
+        "name": "shine"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 131
+    },
+    {
+      "icon": {
+        "paths": [
+          "M864 512l-96 96 96 96-160 160-96-96-96 96-96-96-96 96-160-160 96-96-96-96 96-96-96-96 160-160 96 96 96-96 96 96 96-96 160 160-96 96 96 96z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "stamp",
+          "imprint",
+          "label",
+          "mark",
+          "emboss",
+          "inscribe"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 142,
+        "order": 18,
+        "prevSize": 32,
+        "code": 59663,
+        "name": "box"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 141
+    },
+    {
+      "icon": {
+        "paths": [
+          "M704 672h-128v-128l128-128v-192l-128-128h-128l-128 128v192l128 128v128h-128l-128 128v224h640v-224z"
+        ],
+        "width": 1024,
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "use",
+          "be",
+          "live"
+        ],
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "id": 159,
+        "order": 19,
+        "prevSize": 32,
+        "code": 59664,
+        "name": "person"
+      },
+      "setIdx": 0,
+      "setId": 3,
+      "iconIdx": 158
+    }
+  ],
+  "height": 1024,
+  "metadata": {
+    "name": "tinydungeon"
+  },
+  "preferences": {
+    "showGlyphs": true,
+    "showQuickUse": true,
+    "showQuickUse2": true,
+    "showSVGs": true,
+    "fontPref": {
+      "prefix": "tinydungeon-",
+      "metadata": {
+        "fontFamily": "tinydungeon",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
+      "metrics": {
+        "emSize": 1024,
+        "baseline": 6.25,
+        "whitespace": 50
+      },
+      "embed": false,
+      "showSelector": false,
+      "selector": ""
+    },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215,
+      "classSelector": ".icon"
+    },
+    "historySize": 50,
+    "showCodes": true,
+    "gridSize": 16
+  }
+}

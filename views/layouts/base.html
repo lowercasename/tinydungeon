@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <title>
+      {{#if title}}
+        Tiny Dungeon &rarr; {{title}}
+      {{else}}
+        Tiny Dungeon
+      {{/if}}
+    </title>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tinydungeon/css/normalize.css">
+    <link rel="stylesheet" href="/tinydungeon/css/style.css">
+		<script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+		<link rel='stylesheet' href='/tinydungeon/css/spectrum.css' />
+		<script>
+    Pusher.logToConsole = false;
+  </script>
+    {{#> head-block}}
+      {{!-- Custom head content per page could be added. --}}
+    {{/head-block}}
+  </head>
+  <body>
+    <header>
+      {{#> heading-block}}
+        {{> header }}
+      {{/heading-block}}
+    </header>
+    <main>
+      {{#> content-block}}
+        {{!-- Content goes here. --}}
+      {{/content-block}}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css" rel="stylesheet"/>
+		<style type="text/css">
+		.editable-container.editable-inline {
+			width: 98%;
+		}
+		</style>
+		<script>$.fn.poshytip={defaults:null}</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.js"></script>
+    <script type="text/javascript" src="/tinydungeon/js/jquery.fonticonpicker.min.js"></script>
+		<script src="/tinydungeon/js/dice-roller.js"></script>
+    <script src="/tinydungeon/js/tinydungeon.js"></script>
+    		<script src='/tinydungeon/js/spectrum.js'></script>
+    {{#> scripts-block}}
+      {{!-- Custom scripts per page can be added. --}}
+    {{/scripts-block}}
+    <footer>
+      {{#> footer-block}}
+        {{> footer }}
+      {{/footer-block}}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,470 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?bbi0b3');
+  src:  url('../fonts/icomoon.eot?bbi0b3#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?bbi0b3') format('truetype'),
+    url('../fonts/icomoon.woff?bbi0b3') format('woff'),
+    url('../fonts/icomoon.svg?bbi0b3#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ant:before {
+  content: "\e900";
+}
+.icon-anubis:before {
+  content: "\e901";
+}
+.icon-archer:before {
+  content: "\e902";
+}
+.icon-backup:before {
+  content: "\e903";
+}
+.icon-bad-gnome:before {
+  content: "\e904";
+}
+.icon-barbarian:before {
+  content: "\e905";
+}
+.icon-bat-2:before {
+  content: "\e906";
+}
+.icon-bat-mask:before {
+  content: "\e907";
+}
+.icon-bear-face:before {
+  content: "\e908";
+}
+.icon-bear-head:before {
+  content: "\e909";
+}
+.icon-behold:before {
+  content: "\e90a";
+}
+.icon-bolt-spell-cast:before {
+  content: "\e90b";
+}
+.icon-bottled-shadow:before {
+  content: "\e90c";
+}
+.icon-bowman:before {
+  content: "\e90d";
+}
+.icon-brain-tentacle:before {
+  content: "\e90e";
+}
+.icon-broad-dagger:before {
+  content: "\e90f";
+}
+.icon-brute:before {
+  content: "\e910";
+}
+.icon-bully-minion:before {
+  content: "\e911";
+}
+.icon-carnivorous-plant:before {
+  content: "\e912";
+}
+.icon-cavalry:before {
+  content: "\e913";
+}
+.icon-caveman:before {
+  content: "\e914";
+}
+.icon-centaur:before {
+  content: "\e915";
+}
+.icon-cloak-dagger:before {
+  content: "\e916";
+}
+.icon-cowled:before {
+  content: "\e917";
+}
+.icon-croc-jaws:before {
+  content: "\e918";
+}
+.icon-crossed-swords:before {
+  content: "\e919";
+}
+.icon-crowned-skull:before {
+  content: "\e91a";
+}
+.icon-crystal-wand:before {
+  content: "\e91b";
+}
+.icon-cultist:before {
+  content: "\e91c";
+}
+.icon-curled-tentacle:before {
+  content: "\e91d";
+}
+.icon-daemon-skull:before {
+  content: "\e91e";
+}
+.icon-dinosaur-rex:before {
+  content: "\e91f";
+}
+.icon-double-dragon:before {
+  content: "\e920";
+}
+.icon-dragon-head-2:before {
+  content: "\e921";
+}
+.icon-dragon-head:before {
+  content: "\e922";
+}
+.icon-drakkar-dragon:before {
+  content: "\e923";
+}
+.icon-eagle-head:before {
+  content: "\e924";
+}
+.icon-egyptian-sphinx:before {
+  content: "\e925";
+}
+.icon-elephant:before {
+  content: "\e926";
+}
+.icon-evil-minion:before {
+  content: "\e927";
+}
+.icon-evil-tree:before {
+  content: "\e928";
+}
+.icon-fairy:before {
+  content: "\e929";
+}
+.icon-female-vampire:before {
+  content: "\e92a";
+}
+.icon-fire-spell-cast:before {
+  content: "\e92b";
+}
+.icon-fish-monster:before {
+  content: "\e92c";
+}
+.icon-floating-ghost:before {
+  content: "\e92d";
+}
+.icon-floating-tentacles:before {
+  content: "\e92e";
+}
+.icon-flute:before {
+  content: "\e92f";
+}
+.icon-fomorian:before {
+  content: "\e930";
+}
+.icon-frankenstein-creature:before {
+  content: "\e931";
+}
+.icon-gargoyle:before {
+  content: "\e932";
+}
+.icon-ghost-ally:before {
+  content: "\e933";
+}
+.icon-ghost:before {
+  content: "\e934";
+}
+.icon-giant-squid:before {
+  content: "\e935";
+}
+.icon-giant:before {
+  content: "\e936";
+}
+.icon-goblin-head:before {
+  content: "\e937";
+}
+.icon-golem-head:before {
+  content: "\e938";
+}
+.icon-gooey-daemon:before {
+  content: "\e939";
+}
+.icon-gorilla:before {
+  content: "\e93a";
+}
+.icon-greek-sphinx:before {
+  content: "\e93b";
+}
+.icon-griffin-symbol:before {
+  content: "\e93c";
+}
+.icon-half-body-crawling:before {
+  content: "\e93d";
+}
+.icon-harry-potter-skull:before {
+  content: "\e93e";
+}
+.icon-haunting:before {
+  content: "\e93f";
+}
+.icon-hood:before {
+  content: "\e940";
+}
+.icon-hooded-assassin:before {
+  content: "\e941";
+}
+.icon-horse-head:before {
+  content: "\e942";
+}
+.icon-hydra:before {
+  content: "\e943";
+}
+.icon-ice-golem:before {
+  content: "\e944";
+}
+.icon-ice-spell-cast:before {
+  content: "\e945";
+}
+.icon-ifrit:before {
+  content: "\e946";
+}
+.icon-imp-laugh:before {
+  content: "\e947";
+}
+.icon-imp:before {
+  content: "\e948";
+}
+.icon-infested-mass:before {
+  content: "\e949";
+}
+.icon-interlaced-tentacles:before {
+  content: "\e94a";
+}
+.icon-kenku-head:before {
+  content: "\e94b";
+}
+.icon-lizardman:before {
+  content: "\e94c";
+}
+.icon-lyre:before {
+  content: "\e94d";
+}
+.icon-magic-shield:before {
+  content: "\e94e";
+}
+.icon-masked-spider:before {
+  content: "\e94f";
+}
+.icon-meditation:before {
+  content: "\e950";
+}
+.icon-medusa-head:before {
+  content: "\e951";
+}
+.icon-mermaid:before {
+  content: "\e952";
+}
+.icon-mimic-chest:before {
+  content: "\e953";
+}
+.icon-minotaur:before {
+  content: "\e954";
+}
+.icon-monk-face:before {
+  content: "\e955";
+}
+.icon-mounted-knight:before {
+  content: "\e956";
+}
+.icon-mummy-head:before {
+  content: "\e957";
+}
+.icon-muscle-fat:before {
+  content: "\e958";
+}
+.icon-ninja-head:before {
+  content: "\e959";
+}
+.icon-ninja-heroic-stance:before {
+  content: "\e95a";
+}
+.icon-ogre:before {
+  content: "\e95b";
+}
+.icon-oni:before {
+  content: "\e95c";
+}
+.icon-orc-head:before {
+  content: "\e95d";
+}
+.icon-overlord-helm:before {
+  content: "\e95e";
+}
+.icon-pan-flute:before {
+  content: "\e95f";
+}
+.icon-pikeman:before {
+  content: "\e960";
+}
+.icon-pirate-captain:before {
+  content: "\e961";
+}
+.icon-prayer:before {
+  content: "\e962";
+}
+.icon-running-ninja:before {
+  content: "\e963";
+}
+.icon-sasquatch:before {
+  content: "\e964";
+}
+.icon-sea-creature:before {
+  content: "\e965";
+}
+.icon-sea-dragon:before {
+  content: "\e966";
+}
+.icon-shambling-mound:before {
+  content: "\e967";
+}
+.icon-shambling-zombie:before {
+  content: "\e968";
+}
+.icon-shark-jaws:before {
+  content: "\e969";
+}
+.icon-shield-bash:before {
+  content: "\e96a";
+}
+.icon-sing:before {
+  content: "\e96b";
+}
+.icon-skeleton:before {
+  content: "\e96c";
+}
+.icon-skull-bolt:before {
+  content: "\e96d";
+}
+.icon-skull-mask:before {
+  content: "\e96e";
+}
+.icon-spark-spirit:before {
+  content: "\e96f";
+}
+.icon-spectre:before {
+  content: "\e970";
+}
+.icon-spell-book:before {
+  content: "\e971";
+}
+.icon-spider-alt:before {
+  content: "\e972";
+}
+.icon-spiked-tentacle:before {
+  content: "\e973";
+}
+.icon-squid-head:before {
+  content: "\e974";
+}
+.icon-squid:before {
+  content: "\e975";
+}
+.icon-suckered-tentacle:before {
+  content: "\e976";
+}
+.icon-sword-tie:before {
+  content: "\e977";
+}
+.icon-swordman:before {
+  content: "\e978";
+}
+.icon-swords-emblem:before {
+  content: "\e979";
+}
+.icon-swords-power:before {
+  content: "\e97a";
+}
+.icon-swordwoman:before {
+  content: "\e97b";
+}
+.icon-tentacle-strike:before {
+  content: "\e97c";
+}
+.icon-tentacles-skull:before {
+  content: "\e97d";
+}
+.icon-tiger-head:before {
+  content: "\e97e";
+}
+.icon-transparent-slime:before {
+  content: "\e97f";
+}
+.icon-tree-face:before {
+  content: "\e980";
+}
+.icon-triton-head:before {
+  content: "\e981";
+}
+.icon-troglodyte:before {
+  content: "\e982";
+}
+.icon-troll:before {
+  content: "\e983";
+}
+.icon-unicorn:before {
+  content: "\e984";
+}
+.icon-uprising:before {
+  content: "\e985";
+}
+.icon-vampire-cape:before {
+  content: "\e986";
+}
+.icon-vampire-dracula:before {
+  content: "\e987";
+}
+.icon-viking-head:before {
+  content: "\e988";
+}
+.icon-vulture:before {
+  content: "\e989";
+}
+.icon-warlock-hood:before {
+  content: "\e98a";
+}
+.icon-werewolf:before {
+  content: "\e98b";
+}
+.icon-wisdom:before {
+  content: "\e98c";
+}
+.icon-witch-face:before {
+  content: "\e98d";
+}
+.icon-witch-flight:before {
+  content: "\e98e";
+}
+.icon-wizard-face:before {
+  content: "\e98f";
+}
+.icon-wolf-head:before {
+  content: "\e990";
+}
+.icon-wolf-howl:before {
+  content: "\e991";
+}
+.icon-woman-elf-face:before {
+  content: "\e992";
+}
+.icon-wyvern:before {
+  content: "\e993";
+}
