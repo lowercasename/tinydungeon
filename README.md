@@ -1,4 +1,4 @@
-#Tiny Dungeon
+# Tiny Dungeon
 
 A minimalistic Node.js D&D combat tracker and real time map.
 
