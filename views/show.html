@@ -4,48 +4,135 @@
 {{/inline}}
 
 {{#*inline "content-block"}}
-<p>This is your dungeon. It is always available via <a href="/tinydungeon/dungeon/{{room.name}}">this link</a> and updates for everyone you've shared it with in real time. Make sure to bookmark the link or remember the name because there's no other way to access your dungeon. It will be deleted automatically after 30 days of inactivity.</p>
-<p>Edit dungeon participants by clicking on the <span class="editable-demo">underlined text</span>. Press Enter to save your changes or click away to cancel.</p>
-<p>The color picker updates participants' token colors on the map. To see and edit many more stats, click the <i class="fas fa-plus-square"></i> button; to delete the participant, click <i class="fas fa-skull"></i>.</p>
+<div class="users-online">Users online: <span class="users-count"></span></div>
+<p>This is your dungeon. It is always available via <a href="/dungeon/{{room.name}}">this link</a> and
+  updates for everyone you've shared it with in real time. Make sure to bookmark the link or remember the name because
+  there's no other way to access your dungeon. It will be deleted automatically after 30 days of inactivity.</p>
+<p>Edit dungeon participants by clicking on the <span class="editable-demo">underlined text</span>. Press Enter to save
+  your changes or click away to cancel.</p>
+<p>The color picker updates participants' token colors on the map. To see and edit many more stats, click the <i
+    class="fas fa-plus-square"></i> button; to delete the participant, click <i class="fas fa-skull"></i>.</p>
 
+<h2><i class="fas fa-map"></i> Map</h2>
+<div id="map-section">
+  <form id="map-tools-form">
+    <div id="map-controls">
+      <label>
+        <strong>Tools</strong>
+      </label>
+      <label>
+        <input type="radio" id="black" name="tool" data-tool-type="map" checked />
+        <img src="/images/wall-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="white" name="tool" data-tool-type="map" />
+        <img src="/images/clear-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="door" name="tool" data-tool-type="map" />
+        <img src="/images/door-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="stairs" name="tool" data-tool-type="map" />
+        <img src="/images/stairs-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="column" name="tool" data-tool-type="map" />
+        <img src="/images/column-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="chest" name="tool" data-tool-type="map" />
+        <img src="/images/chest-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="statue" name="tool" data-tool-type="map" />
+        <img src="/images/statue-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="terrain" name="tool" data-tool-type="map" />
+        <img src="/images/terrain-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="rocks" name="tool" data-tool-type="map" />
+        <img src="/images/rocks-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="box" name="tool" data-tool-type="map" />
+        <img src="/images/box-icon.gif">
+      </label>
+      <label>
+        <input type="radio" id="secret" name="tool" data-tool-type="map" />
+        <img src="/images/secret-icon.svg" style="width:25px;">
+      </label>
+      <button type="button" id="clear-map">Clear map</button>
+    </div>
+    <div id="map-participant-controls">
+      <label>
+        <strong>Participants</strong>
+      </label>
+      <button type="button" id="remove-pog" disabled>Remove pog</button>
+    </div>
+  </form>
+  <div id="map-grid-container">
+    <div id="map-grid">
+      {{{cells room.cells}}}
+    </div>
+  </div>
+</div>
+<h2>Stat tracker</h2>
 <table id="members-list">
-	<col width="15%">
-	<col width="8%">
-	<col width="8%">
-	<col width="8%">
-	<col>
-	<col width="30%">
-	<col width="10%">
+  <col width="15%">
+  <col width="5%">
+  <col width="5%">
+  <col width="5%">
+  <col>
+  <col width="30%">
+  <col width="5%">
+  <col width="5%">
   <thead>
     <tr>
       <th>Name</th>
       <th>Init</th>
-			<th>AC</th>
+      <th>AC</th>
       <th>HP</th>
       <th>Current HP</th>
-			<th>Notes</th>
+      <th>Notes</th>
+      <th>Color</th>
       <th>Controls</th>
     </tr>
   </thead>
   <tbody>
-  {{#each room.members}}
+    {{#each room.members}}
     <tr class="{{this.id}} main-row">
-      <td><a href="#" class="editable name" data-name="name" data-type="text" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.name}}</a></td>
-			<td><a href="#" class="editable init" data-name="init" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.init}}</a></td>
-			<td><a href="#" class="editable ac" data-name="ac" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.ac}}</a></td>
-			<td><a href="#" class="editable hp" data-name="hp" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.hp}}</a></td>
-			<td><div class="hpbarborder"><div class="hpbar"><a href="#" class="editable chp" data-name="chp" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.chp}}</a></div></div></td>
-			<td><a href="#" class="editable notes" data-name="notes" data-type="textarea" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member" data-text="Make a note">{{this.notes}}</a></td>
+      <td><a href="#" class="editable name" data-name="name" data-type="text" data-pk="{{this.id}}"
+          data-url="/edit_member">{{this.name}}</a></td>
+      <td><a href="#" class="editable init" data-name="init" data-type="number" data-pk="{{this.id}}"
+          data-url="/edit_member">{{this.init}}</a></td>
+      <td><a href="#" class="editable ac" data-name="ac" data-type="number" data-pk="{{this.id}}"
+          data-url="/edit_member">{{this.ac}}</a></td>
+      <td><a href="#" class="editable hp" data-name="hp" data-type="number" data-pk="{{this.id}}"
+          data-url="/edit_member">{{this.hp}}</a></td>
+      <td>
+        <div class="hpbarborder">
+          <div class="hpbar"><a href="#" class="editable chp" data-name="chp" data-type="number" data-pk="{{this.id}}"
+              data-url="/edit_member">{{this.chp}}</a></div>
+        </div>
+      </td>
+      <td><a href="#" class="editable notes" data-name="notes" data-type="textarea" data-pk="{{this.id}}"
+          data-url="/edit_member" data-text="Make a note">{{this.notes}}</a>
+      </td>
+      <td>
+        <input type='text' class="color-picker" data-id="{{this.id}}" data-color="{{this.color}}" />
+      </td>
       <td>
         <div class="member-controls" style="display: flex;justify-content: space-around">
-        	<input type='text' class="color-picker" data-id="{{this.id}}" data-color="{{this.color}}" />
-					<a class="expand-toggle" href="#" data-id="{{this.id}}" data-room="{{../room.id}}">
+          <a class="expand-toggle" href="#" data-id="{{this.id}}" data-room="{{../room.id}}">
             <span><i class="fas fa-plus-square"></i></span>
           </a>
           <a class="delete-member" href="#" data-id="{{this.id}}" data-room="{{../room.id}}">
             <span><i class="fas fa-skull"></i></span>
           </a>
-<!--
+          <!--
           <select id="icon-selector-{{this.id}}" name="icon-selector-{{this.id}}" class="icon-selector">
     <option value="">No icon</option>
     <option>tinydungeon-mountain</option>
@@ -70,381 +157,405 @@
         </div>
       </td>
     </tr>
-		<tr class="{{this.id}} toggle-row">
-			<td colspan="7">
-				<div class="toggle-container">
-				<div class="stats-container">
-					<ul class="stats">
-						<li><strong>STR</strong> <a href="#" class="editable stats-str" data-name="stats-str" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-str}}</a>{{#if this.stats-str}} ({{{statbonus this.stats-str}}}){{/if}}</li>
-						<li><strong>DEX</strong> <a href="#" class="editable stats-dex" data-name="stats-dex" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-dex}}</a>{{#if this.stats-dex}} ({{{statbonus this.stats-dex}}}){{/if}}</li>
-						<li><strong>CON</strong> <a href="#" class="editable stats-con" data-name="stats-con" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-con}}</a>{{#if this.stats-con}} ({{{statbonus this.stats-con}}}){{/if}}</li>
-						<li><strong>INT</strong> <a href="#" class="editable stats-int" data-name="stats-int" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-int}}</a>{{#if this.stats-int}} ({{{statbonus this.stats-int}}}){{/if}}</li>
-						<li><strong>WIS</strong> <a href="#" class="editable stats-wis" data-name="stats-wis" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-wis}}</a>{{#if this.stats-wis}} ({{{statbonus this.stats-wis}}}){{/if}}</li>
-						<li><strong>CHA</strong> <a href="#" class="editable stats-cha" data-name="stats-cha" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-cha}}</a>{{#if this.stats-cha}} ({{{statbonus this.stats-cha}}}){{/if}}</li>
-					</ul>
-					<ul class="other">
-						<li><strong>Size</strong> <a href="#" class="editable stats-size" data-name="stats-size" data-type="text" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-size}}</a></li>
-						<li><strong>Proficiency Bonus</strong> <a href="#" class="editable stats-prof" data-name="stats-prof" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-prof}}</a></li>
-						<li><strong>Passive Perception</strong> <a href="#" class="editable stats-pp" data-name="stats-pp" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-pp}}</a></li>
-						<li><strong>XP</strong> <a href="#" class="editable stats-xp" data-name="stats-xp" data-type="number" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-xp}}</a></li>
-						<li><strong>Speed</strong> <a href="#" class="editable stats-speed" data-name="stats-speed" data-type="text" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-speed}}</a></li>
-						<li><strong>Senses</strong> <a href="#" class="editable stats-senses" data-name="stats-senses" data-type="text" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-senses}}</a></li>
-						<li><strong>Proficiencies</strong> <a href="#" class="editable stats-proficiencies" data-name="stats-proficiencies" data-type="text" data-pk="{{this.id}}" data-url="/tinydungeon/edit_member">{{this.stats-proficiencies}}</a></li>
-					</ul>
-					<ul class="monster-info">
-						<li style="font-size: smaller;">{{{this.info}}}</li>
-					</ul>
-				</div>
-				</div>
-			</td>
-		</tr>
-  {{/each}}
+    <tr class="{{this.id}} toggle-row">
+      <td colspan="7">
+        <div class="toggle-container">
+          <div class="stats-container">
+            <ul class="stats">
+              <li><strong>STR</strong> <a href="#" class="editable stats-str" data-name="stats-str" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-str}}</a>{{#if this.stats-str}}
+                ({{{statbonus this.stats-str}}}){{/if}}</li>
+              <li><strong>DEX</strong> <a href="#" class="editable stats-dex" data-name="stats-dex" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-dex}}</a>{{#if this.stats-dex}}
+                ({{{statbonus this.stats-dex}}}){{/if}}</li>
+              <li><strong>CON</strong> <a href="#" class="editable stats-con" data-name="stats-con" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-con}}</a>{{#if this.stats-con}}
+                ({{{statbonus this.stats-con}}}){{/if}}</li>
+              <li><strong>INT</strong> <a href="#" class="editable stats-int" data-name="stats-int" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-int}}</a>{{#if this.stats-int}}
+                ({{{statbonus this.stats-int}}}){{/if}}</li>
+              <li><strong>WIS</strong> <a href="#" class="editable stats-wis" data-name="stats-wis" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-wis}}</a>{{#if this.stats-wis}}
+                ({{{statbonus this.stats-wis}}}){{/if}}</li>
+              <li><strong>CHA</strong> <a href="#" class="editable stats-cha" data-name="stats-cha" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-cha}}</a>{{#if this.stats-cha}}
+                ({{{statbonus this.stats-cha}}}){{/if}}</li>
+            </ul>
+            <ul class="other">
+              <li><strong>Size</strong> <a href="#" class="editable stats-size" data-name="stats-size" data-type="text"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-size}}</a></li>
+              <li><strong>Proficiency Bonus</strong> <a href="#" class="editable stats-prof" data-name="stats-prof"
+                  data-type="number" data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-prof}}</a>
+              </li>
+              <li><strong>Passive Perception</strong> <a href="#" class="editable stats-pp" data-name="stats-pp"
+                  data-type="number" data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-pp}}</a>
+              </li>
+              <li><strong>XP</strong> <a href="#" class="editable stats-xp" data-name="stats-xp" data-type="number"
+                  data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-xp}}</a></li>
+              <li><strong>Speed</strong> <a href="#" class="editable stats-speed" data-name="stats-speed"
+                  data-type="text" data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-speed}}</a>
+              </li>
+              <li><strong>Senses</strong> <a href="#" class="editable stats-senses" data-name="stats-senses"
+                  data-type="text" data-pk="{{this.id}}" data-url="/edit_member">{{this.stats-senses}}</a>
+              </li>
+              <li><strong>Proficiencies</strong> <a href="#" class="editable stats-proficiencies"
+                  data-name="stats-proficiencies" data-type="text" data-pk="{{this.id}}"
+                  data-url="/edit_member">{{this.stats-proficiencies}}</a></li>
+            </ul>
+            <ul class="monster-info">
+              <li style="font-size: smaller;">{{{this.info}}}</li>
+            </ul>
+          </div>
+        </div>
+      </td>
+    </tr>
+    {{/each}}
   </tbody>
 </table>
 <div class="col-left">
-<h2><i class="fas fa-user-shield"></i> Add a participant</h2>
-<form id="add_member">
-  <input id="name" type="text" placeholder="Name" ><br>
-  <input id="init" type="number" placeholder="Initiative" ><br>
-	<input id="ac" type="number" placeholder="Armor Class (AC)" ><br>
-  <input id="hp" type="number" placeholder="Hitpoints (HP)" ><br>
-  <input hidden id="room_name" type="text" value="{{room.name}}" >
-	<input hidden id="room_id" type="text" value="{{room.id}}" ><br>
-  <button type="submit">Add</button>
-</form>
-	</div>
+  <h2><i class="fas fa-user-shield"></i> Add a participant</h2>
+  <form id="add_member">
+    <input id="name" type="text" placeholder="Name"><br>
+    <input id="init" type="number" placeholder="Initiative"><br>
+    <input id="ac" type="number" placeholder="Armor Class (AC)"><br>
+    <input id="hp" type="number" placeholder="Hitpoints (HP)"><br>
+    <input hidden id="room_name" type="text" value="{{room.name}}">
+    <input hidden id="room_id" type="text" value="{{room.id}}"><br>
+    <button type="submit">Add</button>
+  </form>
+</div>
 <div class="col-right">
-<h2><i class="fas fa-book"></i> Generate a monster</h2>
-<p>This tool will roll up a new monster from the D&amp;D 5e SRD and add it to the dungeon.</p>
-<form id="generate_monster">
-	<select id="monster_name">
-		<option value="Aboleth">Aboleth</option>
-		<option value="Acolyte">Acolyte</option>
-		<option value="Adult Black Dragon">Adult Black Dragon</option>
-		<option value="Adult Blue Dracolich">Adult Blue Dracolich</option>
-		<option value="Adult Blue Dragon">Adult Blue Dragon</option>
-		<option value="Adult Brass Dragon">Adult Brass Dragon</option>
-		<option value="Adult Bronze Dragon">Adult Bronze Dragon</option>
-		<option value="Adult Copper Dragon">Adult Copper Dragon</option>
-		<option value="Adult Gold Dragon">Adult Gold Dragon</option>
-		<option value="Adult Green Dragon">Adult Green Dragon</option>
-		<option value="Adult Red Dragon">Adult Red Dragon</option>
-		<option value="Adult Silver Dragon">Adult Silver Dragon</option>
-		<option value="Adult White Dragon">Adult White Dragon</option>
-		<option value="Air Elemental">Air Elemental</option>
-		<option value="Ancient Black Dragon">Ancient Black Dragon</option>
-		<option value="Ancient Blue Dragon">Ancient Blue Dragon</option>
-		<option value="Ancient Brass Dragon">Ancient Brass Dragon</option>
-		<option value="Ancient Bronze Dragon">Ancient Bronze Dragon</option>
-		<option value="Ancient Copper Dragon">Ancient Copper Dragon</option>
-		<option value="Ancient Gold Dragon">Ancient Gold Dragon</option>
-		<option value="Ancient Green Dragon">Ancient Green Dragon</option>
-		<option value="Ancient Red Dragon">Ancient Red Dragon</option>
-		<option value="Ancient Silver Dragon">Ancient Silver Dragon</option>
-		<option value="Ancient White Dragon">Ancient White Dragon</option>
-		<option value="Androsphinx">Androsphinx</option>
-		<option value="Animated Armor">Animated Armor</option>
-		<option value="Ankheg">Ankheg</option>
-		<option value="Ape">Ape</option>
-		<option value="Archmage">Archmage</option>
-		<option value="Assassin">Assassin</option>
-		<option value="Awakened Shrub">Awakened Shrub</option>
-		<option value="Awakened Tree">Awakened Tree</option>
-		<option value="Axe Beak">Axe Beak</option>
-		<option value="Azer">Azer</option>
-		<option value="Baboon">Baboon</option>
-		<option value="Badger">Badger</option>
-		<option value="Balor">Balor</option>
-		<option value="Bandit">Bandit</option>
-		<option value="Bandit Captain">Bandit Captain</option>
-		<option value="Barbed Devil">Barbed Devil</option>
-		<option value="Basilisk">Basilisk</option>
-		<option value="Bat">Bat</option>
-		<option value="Bearded Devil">Bearded Devil</option>
-		<option value="Behir">Behir</option>
-		<option value="Berserker">Berserker</option>
-		<option value="Black Bear">Black Bear</option>
-		<option value="Black Dragon Wyrmling">Black Dragon Wyrmling</option>
-		<option value="Black Pudding">Black Pudding</option>
-		<option value="Blink Dog">Blink Dog</option>
-		<option value="Blood Hawk">Blood Hawk</option>
-		<option value="Blue Dragon Wyrmling">Blue Dragon Wyrmling</option>
-		<option value="Boar">Boar</option>
-		<option value="Bone Devil">Bone Devil</option>
-		<option value="Brass Dragon Wyrmling">Brass Dragon Wyrmling</option>
-		<option value="Bronze Dragon Wyrmling">Bronze Dragon Wyrmling</option>
-		<option value="Brown Bear">Brown Bear</option>
-		<option value="Bugbear">Bugbear</option>
-		<option value="Bulette">Bulette</option>
-		<option value="Camel">Camel</option>
-		<option value="Carrion Crawler">Carrion Crawler</option>
-		<option value="Cat">Cat</option>
-		<option value="Cave Bear">Cave Bear</option>
-		<option value="Centaur">Centaur</option>
-		<option value="Chain Devil">Chain Devil</option>
-		<option value="Chimera">Chimera</option>
-		<option value="Chuul">Chuul</option>
-		<option value="Clay Golem">Clay Golem</option>
-		<option value="Cloaker">Cloaker</option>
-		<option value="Cloud Giant">Cloud Giant</option>
-		<option value="Cockatrice">Cockatrice</option>
-		<option value="Commoner">Commoner</option>
-		<option value="Constrictor Snake">Constrictor Snake</option>
-		<option value="Copper Dragon Wyrmling">Copper Dragon Wyrmling</option>
-		<option value="Couatl">Couatl</option>
-		<option value="Crab">Crab</option>
-		<option value="Crocodile">Crocodile</option>
-		<option value="Cult Fanatic">Cult Fanatic</option>
-		<option value="Cultist">Cultist</option>
-		<option value="Darkmantle">Darkmantle</option>
-		<option value="Death Dog">Death Dog</option>
-		<option value="Deep Gnome (Svirfneblin)">Deep Gnome (Svirfneblin)</option>
-		<option value="Deer">Deer</option>
-		<option value="Deva">Deva</option>
-		<option value="Dire Wolf">Dire Wolf</option>
-		<option value="Djinni">Djinni</option>
-		<option value="Doppelganger">Doppelganger</option>
-		<option value="Draft Horse">Draft Horse</option>
-		<option value="Dragon Turtle">Dragon Turtle</option>
-		<option value="Dretch">Dretch</option>
-		<option value="Drider">Drider</option>
-		<option value="Drow">Drow</option>
-		<option value="Druid">Druid</option>
-		<option value="Dryad">Dryad</option>
-		<option value="Duergar">Duergar</option>
-		<option value="Dust Mephit">Dust Mephit</option>
-		<option value="Eagle">Eagle</option>
-		<option value="Earth Elemental">Earth Elemental</option>
-		<option value="Efreeti">Efreeti</option>
-		<option value="Elephant">Elephant</option>
-		<option value="Elk">Elk</option>
-		<option value="Erinyes">Erinyes</option>
-		<option value="Ettercap">Ettercap</option>
-		<option value="Ettin">Ettin</option>
-		<option value="Fire Elemental">Fire Elemental</option>
-		<option value="Fire Giant">Fire Giant</option>
-		<option value="Flesh Golem">Flesh Golem</option>
-		<option value="Flying Snake">Flying Snake</option>
-		<option value="Flying Sword">Flying Sword</option>
-		<option value="Frog">Frog</option>
-		<option value="Frost Giant">Frost Giant</option>
-		<option value="Gargoyle">Gargoyle</option>
-		<option value="Gelatinous Cube">Gelatinous Cube</option>
-		<option value="Ghast">Ghast</option>
-		<option value="Ghost">Ghost</option>
-		<option value="Ghoul">Ghoul</option>
-		<option value="Giant Ape">Giant Ape</option>
-		<option value="Giant Badger">Giant Badger</option>
-		<option value="Giant Bat">Giant Bat</option>
-		<option value="Giant Boar">Giant Boar</option>
-		<option value="Giant Centipede">Giant Centipede</option>
-		<option value="Giant Constrictor Snake">Giant Constrictor Snake</option>
-		<option value="Giant Crab">Giant Crab</option>
-		<option value="Giant Crocodile">Giant Crocodile</option>
-		<option value="Giant Eagle">Giant Eagle</option>
-		<option value="Giant Elk">Giant Elk</option>
-		<option value="Giant Fire Beetle">Giant Fire Beetle</option>
-		<option value="Giant Frog">Giant Frog</option>
-		<option value="Giant Goat">Giant Goat</option>
-		<option value="Giant Hyena">Giant Hyena</option>
-		<option value="Giant Lizard">Giant Lizard</option>
-		<option value="Giant Octopus">Giant Octopus</option>
-		<option value="Giant Owl">Giant Owl</option>
-		<option value="Giant Poisonous Snake">Giant Poisonous Snake</option>
-		<option value="Giant Rat">Giant Rat</option>
-		<option value="Giant Rat (Diseased)">Giant Rat (Diseased)</option>
-		<option value="Giant Scorpion">Giant Scorpion</option>
-		<option value="Giant Sea Horse">Giant Sea Horse</option>
-		<option value="Giant Shark">Giant Shark</option>
-		<option value="Giant Spider">Giant Spider</option>
-		<option value="Giant Toad">Giant Toad</option>
-		<option value="Giant Vulture">Giant Vulture</option>
-		<option value="Giant Wasp">Giant Wasp</option>
-		<option value="Giant Weasel">Giant Weasel</option>
-		<option value="Giant Wolf Spider">Giant Wolf Spider</option>
-		<option value="Gibbering Mouther">Gibbering Mouther</option>
-		<option value="Glabrezu">Glabrezu</option>
-		<option value="Gladiator">Gladiator</option>
-		<option value="Gnoll">Gnoll</option>
-		<option value="Goat">Goat</option>
-		<option value="Goblin">Goblin</option>
-		<option value="Gold Dragon Wyrmling">Gold Dragon Wyrmling</option>
-		<option value="Gorgon">Gorgon</option>
-		<option value="Gray Ooze">Gray Ooze</option>
-		<option value="Green Dragon Wyrmling">Green Dragon Wyrmling</option>
-		<option value="Green Hag">Green Hag</option>
-		<option value="Grick">Grick</option>
-		<option value="Griffon">Griffon</option>
-		<option value="Grimlock">Grimlock</option>
-		<option value="Guard">Guard</option>
-		<option value="Guardian Naga">Guardian Naga</option>
-		<option value="Gynosphinx">Gynosphinx</option>
-		<option value="Half-Red Dragon Veteran">Half-Red Dragon Veteran</option>
-		<option value="Harpy">Harpy</option>
-		<option value="Hawk">Hawk</option>
-		<option value="Hell Hound">Hell Hound</option>
-		<option value="Hezrou">Hezrou</option>
-		<option value="Hill Giant">Hill Giant</option>
-		<option value="Hippogriff">Hippogriff</option>
-		<option value="Hobgoblin">Hobgoblin</option>
-		<option value="Homunculus">Homunculus</option>
-		<option value="Horned Devil">Horned Devil</option>
-		<option value="Hunter Shark">Hunter Shark</option>
-		<option value="Hydra">Hydra</option>
-		<option value="Hyena">Hyena</option>
-		<option value="Ice Devil">Ice Devil</option>
-		<option value="Ice Mephit">Ice Mephit</option>
-		<option value="Imp">Imp</option>
-		<option value="Invisible Stalker">Invisible Stalker</option>
-		<option value="Iron Golem">Iron Golem</option>
-		<option value="Jackal">Jackal</option>
-		<option value="Killer Whale">Killer Whale</option>
-		<option value="Knight">Knight</option>
-		<option value="Kobold">Kobold</option>
-		<option value="Kraken">Kraken</option>
-		<option value="Lamia">Lamia</option>
-		<option value="Lemure">Lemure</option>
-		<option value="Lich">Lich</option>
-		<option value="Lion">Lion</option>
-		<option value="Lizard">Lizard</option>
-		<option value="Lizardfolk">Lizardfolk</option>
-		<option value="Mage">Mage</option>
-		<option value="Magma Mephit">Magma Mephit</option>
-		<option value="Magmin">Magmin</option>
-		<option value="Mammoth">Mammoth</option>
-		<option value="Manticore">Manticore</option>
-		<option value="Marilith">Marilith</option>
-		<option value="Mastiff">Mastiff</option>
-		<option value="Medusa">Medusa</option>
-		<option value="Merfolk">Merfolk</option>
-		<option value="Merrow">Merrow</option>
-		<option value="Mimic">Mimic</option>
-		<option value="Minotaur">Minotaur</option>
-		<option value="Minotaur Skeleton">Minotaur Skeleton</option>
-		<option value="Mule">Mule</option>
-		<option value="Mummy">Mummy</option>
-		<option value="Mummy Lord">Mummy Lord</option>
-		<option value="Nalfeshnee">Nalfeshnee</option>
-		<option value="Night Hag">Night Hag</option>
-		<option value="Nightmare">Nightmare</option>
-		<option value="Noble">Noble</option>
-		<option value="Ochre Jelly">Ochre Jelly</option>
-		<option value="Octopus">Octopus</option>
-		<option value="Ogre">Ogre</option>
-		<option value="Ogre Zombie">Ogre Zombie</option>
-		<option value="Oni">Oni</option>
-		<option value="Orc">Orc</option>
-		<option value="Otyugh">Otyugh</option>
-		<option value="Owl">Owl</option>
-		<option value="Owlbear">Owlbear</option>
-		<option value="Panther">Panther</option>
-		<option value="Pegasus">Pegasus</option>
-		<option value="Phase Spider">Phase Spider</option>
-		<option value="Pit Fiend">Pit Fiend</option>
-		<option value="Planetar">Planetar</option>
-		<option value="Plesiosaurus">Plesiosaurus</option>
-		<option value="Poisonous Snake">Poisonous Snake</option>
-		<option value="Polar Bear">Polar Bear</option>
-		<option value="Pony">Pony</option>
-		<option value="Priest">Priest</option>
-		<option value="Pseudodragon">Pseudodragon</option>
-		<option value="Purple Worm">Purple Worm</option>
-		<option value="Quasit">Quasit</option>
-		<option value="Quipper">Quipper</option>
-		<option value="Rakshasa">Rakshasa</option>
-		<option value="Rat">Rat</option>
-		<option value="Raven">Raven</option>
-		<option value="Red Dragon Wyrmling">Red Dragon Wyrmling</option>
-		<option value="Reef Shark">Reef Shark</option>
-		<option value="Remorhaz">Remorhaz</option>
-		<option value="Rhinoceros">Rhinoceros</option>
-		<option value="Riding Horse">Riding Horse</option>
-		<option value="Roc">Roc</option>
-		<option value="Roper">Roper</option>
-		<option value="Rug of Smothering">Rug of Smothering</option>
-		<option value="Rust Monster">Rust Monster</option>
-		<option value="Saber-Toothed Tiger">Saber-Toothed Tiger</option>
-		<option value="Sahuagin">Sahuagin</option>
-		<option value="Salamander">Salamander</option>
-		<option value="Satyr">Satyr</option>
-		<option value="Scorpion">Scorpion</option>
-		<option value="Scout">Scout</option>
-		<option value="Sea Hag">Sea Hag</option>
-		<option value="Sea Horse">Sea Horse</option>
-		<option value="Shadow">Shadow</option>
-		<option value="Shambling Mound">Shambling Mound</option>
-		<option value="Shield Guardian">Shield Guardian</option>
-		<option value="Shrieker">Shrieker</option>
-		<option value="Silver Dragon Wyrmling">Silver Dragon Wyrmling</option>
-		<option value="Skeleton">Skeleton</option>
-		<option value="Solar">Solar</option>
-		<option value="Specter">Specter</option>
-		<option value="Spider">Spider</option>
-		<option value="Spirit Naga">Spirit Naga</option>
-		<option value="Sprite">Sprite</option>
-		<option value="Spy">Spy</option>
-		<option value="Steam Mephit">Steam Mephit</option>
-		<option value="Stirge">Stirge</option>
-		<option value="Stone Giant">Stone Giant</option>
-		<option value="Stone Golem">Stone Golem</option>
-		<option value="Storm Giant">Storm Giant</option>
-		<option value="Succubus/Incubus">Succubus/Incubus</option>
-		<option value="Swarm of Bats">Swarm of Bats</option>
-		<option value="Swarm of Beetles">Swarm of Beetles</option>
-		<option value="Swarm of Centipedes">Swarm of Centipedes</option>
-		<option value="Swarm of Insects">Swarm of Insects</option>
-		<option value="Swarm of Poisonous Snakes">Swarm of Poisonous Snakes</option>
-		<option value="Swarm of Quippers">Swarm of Quippers</option>
-		<option value="Swarm of Rats">Swarm of Rats</option>
-		<option value="Swarm of Ravens">Swarm of Ravens</option>
-		<option value="Swarm of Spiders">Swarm of Spiders</option>
-		<option value="Swarm of Wasps">Swarm of Wasps</option>
-		<option value="Tarrasque">Tarrasque</option>
-		<option value="Thug">Thug</option>
-		<option value="Tiger">Tiger</option>
-		<option value="Treant">Treant</option>
-		<option value="Tribal Warrior">Tribal Warrior</option>
-		<option value="Triceratops">Triceratops</option>
-		<option value="Troll">Troll</option>
-		<option value="Tyrannosaurus Rex">Tyrannosaurus Rex</option>
-		<option value="Unicorn">Unicorn</option>
-		<option value="Vampire">Vampire</option>
-		<option value="Vampire Spawn">Vampire Spawn</option>
-		<option value="Veteran">Veteran</option>
-		<option value="Violet Fungus">Violet Fungus</option>
-		<option value="Vrock">Vrock</option>
-		<option value="Vulture">Vulture</option>
-		<option value="Warhorse">Warhorse</option>
-		<option value="Warhorse Skeleton">Warhorse Skeleton</option>
-		<option value="Water Elemental">Water Elemental</option>
-		<option value="Weasel">Weasel</option>
-		<option value="Werebear">Werebear</option>
-		<option value="Wereboar">Wereboar</option>
-		<option value="Wererat">Wererat</option>
-		<option value="Weretiger">Weretiger</option>
-		<option value="Werewolf">Werewolf</option>
-		<option value="White Dragon Wyrmling">White Dragon Wyrmling</option>
-		<option value="Wight">Wight</option>
-		<option value="Will-o'-Wisp">Will-o'-Wisp</option>
-		<option value="Winter Wolf">Winter Wolf</option>
-		<option value="Wolf">Wolf</option>
-		<option value="Worg">Worg</option>
-		<option value="Wraith">Wraith</option>
-		<option value="Wyvern">Wyvern</option>
-		<option value="Xorn">Xorn</option>
-		<option value="Young Black Dragon">Young Black Dragon</option>
-		<option value="Young Blue Dragon">Young Blue Dragon</option>
-		<option value="Young Brass Dragon">Young Brass Dragon</option>
-		<option value="Young Bronze Dragon">Young Bronze Dragon</option>
-		<option value="Young Copper Dragon">Young Copper Dragon</option>
-		<option value="Young Gold Dragon">Young Gold Dragon</option>
-		<option value="Young Green Dragon">Young Green Dragon</option>
-		<option value="Young Red Dragon">Young Red Dragon</option>
-		<option value="Young Silver Dragon">Young Silver Dragon</option>
-		<option value="Young White Dragon">Young White Dragon</option>
-		<option value="Zombie">Zombie</option>
-	</select>
-<!--
+  <h2><i class="fas fa-book"></i> Generate a monster</h2>
+  <p>This tool will roll up a new monster from the D&amp;D 5e SRD and add it to the dungeon.</p>
+  <form id="generate_monster">
+    <select id="monster_name">
+      <option value="Aboleth">Aboleth</option>
+      <option value="Acolyte">Acolyte</option>
+      <option value="Adult Black Dragon">Adult Black Dragon</option>
+      <option value="Adult Blue Dracolich">Adult Blue Dracolich</option>
+      <option value="Adult Blue Dragon">Adult Blue Dragon</option>
+      <option value="Adult Brass Dragon">Adult Brass Dragon</option>
+      <option value="Adult Bronze Dragon">Adult Bronze Dragon</option>
+      <option value="Adult Copper Dragon">Adult Copper Dragon</option>
+      <option value="Adult Gold Dragon">Adult Gold Dragon</option>
+      <option value="Adult Green Dragon">Adult Green Dragon</option>
+      <option value="Adult Red Dragon">Adult Red Dragon</option>
+      <option value="Adult Silver Dragon">Adult Silver Dragon</option>
+      <option value="Adult White Dragon">Adult White Dragon</option>
+      <option value="Air Elemental">Air Elemental</option>
+      <option value="Ancient Black Dragon">Ancient Black Dragon</option>
+      <option value="Ancient Blue Dragon">Ancient Blue Dragon</option>
+      <option value="Ancient Brass Dragon">Ancient Brass Dragon</option>
+      <option value="Ancient Bronze Dragon">Ancient Bronze Dragon</option>
+      <option value="Ancient Copper Dragon">Ancient Copper Dragon</option>
+      <option value="Ancient Gold Dragon">Ancient Gold Dragon</option>
+      <option value="Ancient Green Dragon">Ancient Green Dragon</option>
+      <option value="Ancient Red Dragon">Ancient Red Dragon</option>
+      <option value="Ancient Silver Dragon">Ancient Silver Dragon</option>
+      <option value="Ancient White Dragon">Ancient White Dragon</option>
+      <option value="Androsphinx">Androsphinx</option>
+      <option value="Animated Armor">Animated Armor</option>
+      <option value="Ankheg">Ankheg</option>
+      <option value="Ape">Ape</option>
+      <option value="Archmage">Archmage</option>
+      <option value="Assassin">Assassin</option>
+      <option value="Awakened Shrub">Awakened Shrub</option>
+      <option value="Awakened Tree">Awakened Tree</option>
+      <option value="Axe Beak">Axe Beak</option>
+      <option value="Azer">Azer</option>
+      <option value="Baboon">Baboon</option>
+      <option value="Badger">Badger</option>
+      <option value="Balor">Balor</option>
+      <option value="Bandit">Bandit</option>
+      <option value="Bandit Captain">Bandit Captain</option>
+      <option value="Barbed Devil">Barbed Devil</option>
+      <option value="Basilisk">Basilisk</option>
+      <option value="Bat">Bat</option>
+      <option value="Bearded Devil">Bearded Devil</option>
+      <option value="Behir">Behir</option>
+      <option value="Berserker">Berserker</option>
+      <option value="Black Bear">Black Bear</option>
+      <option value="Black Dragon Wyrmling">Black Dragon Wyrmling</option>
+      <option value="Black Pudding">Black Pudding</option>
+      <option value="Blink Dog">Blink Dog</option>
+      <option value="Blood Hawk">Blood Hawk</option>
+      <option value="Blue Dragon Wyrmling">Blue Dragon Wyrmling</option>
+      <option value="Boar">Boar</option>
+      <option value="Bone Devil">Bone Devil</option>
+      <option value="Brass Dragon Wyrmling">Brass Dragon Wyrmling</option>
+      <option value="Bronze Dragon Wyrmling">Bronze Dragon Wyrmling</option>
+      <option value="Brown Bear">Brown Bear</option>
+      <option value="Bugbear">Bugbear</option>
+      <option value="Bulette">Bulette</option>
+      <option value="Camel">Camel</option>
+      <option value="Carrion Crawler">Carrion Crawler</option>
+      <option value="Cat">Cat</option>
+      <option value="Cave Bear">Cave Bear</option>
+      <option value="Centaur">Centaur</option>
+      <option value="Chain Devil">Chain Devil</option>
+      <option value="Chimera">Chimera</option>
+      <option value="Chuul">Chuul</option>
+      <option value="Clay Golem">Clay Golem</option>
+      <option value="Cloaker">Cloaker</option>
+      <option value="Cloud Giant">Cloud Giant</option>
+      <option value="Cockatrice">Cockatrice</option>
+      <option value="Commoner">Commoner</option>
+      <option value="Constrictor Snake">Constrictor Snake</option>
+      <option value="Copper Dragon Wyrmling">Copper Dragon Wyrmling</option>
+      <option value="Couatl">Couatl</option>
+      <option value="Crab">Crab</option>
+      <option value="Crocodile">Crocodile</option>
+      <option value="Cult Fanatic">Cult Fanatic</option>
+      <option value="Cultist">Cultist</option>
+      <option value="Darkmantle">Darkmantle</option>
+      <option value="Death Dog">Death Dog</option>
+      <option value="Deep Gnome (Svirfneblin)">Deep Gnome (Svirfneblin)</option>
+      <option value="Deer">Deer</option>
+      <option value="Deva">Deva</option>
+      <option value="Dire Wolf">Dire Wolf</option>
+      <option value="Djinni">Djinni</option>
+      <option value="Doppelganger">Doppelganger</option>
+      <option value="Draft Horse">Draft Horse</option>
+      <option value="Dragon Turtle">Dragon Turtle</option>
+      <option value="Dretch">Dretch</option>
+      <option value="Drider">Drider</option>
+      <option value="Drow">Drow</option>
+      <option value="Druid">Druid</option>
+      <option value="Dryad">Dryad</option>
+      <option value="Duergar">Duergar</option>
+      <option value="Dust Mephit">Dust Mephit</option>
+      <option value="Eagle">Eagle</option>
+      <option value="Earth Elemental">Earth Elemental</option>
+      <option value="Efreeti">Efreeti</option>
+      <option value="Elephant">Elephant</option>
+      <option value="Elk">Elk</option>
+      <option value="Erinyes">Erinyes</option>
+      <option value="Ettercap">Ettercap</option>
+      <option value="Ettin">Ettin</option>
+      <option value="Fire Elemental">Fire Elemental</option>
+      <option value="Fire Giant">Fire Giant</option>
+      <option value="Flesh Golem">Flesh Golem</option>
+      <option value="Flying Snake">Flying Snake</option>
+      <option value="Flying Sword">Flying Sword</option>
+      <option value="Frog">Frog</option>
+      <option value="Frost Giant">Frost Giant</option>
+      <option value="Gargoyle">Gargoyle</option>
+      <option value="Gelatinous Cube">Gelatinous Cube</option>
+      <option value="Ghast">Ghast</option>
+      <option value="Ghost">Ghost</option>
+      <option value="Ghoul">Ghoul</option>
+      <option value="Giant Ape">Giant Ape</option>
+      <option value="Giant Badger">Giant Badger</option>
+      <option value="Giant Bat">Giant Bat</option>
+      <option value="Giant Boar">Giant Boar</option>
+      <option value="Giant Centipede">Giant Centipede</option>
+      <option value="Giant Constrictor Snake">Giant Constrictor Snake</option>
+      <option value="Giant Crab">Giant Crab</option>
+      <option value="Giant Crocodile">Giant Crocodile</option>
+      <option value="Giant Eagle">Giant Eagle</option>
+      <option value="Giant Elk">Giant Elk</option>
+      <option value="Giant Fire Beetle">Giant Fire Beetle</option>
+      <option value="Giant Frog">Giant Frog</option>
+      <option value="Giant Goat">Giant Goat</option>
+      <option value="Giant Hyena">Giant Hyena</option>
+      <option value="Giant Lizard">Giant Lizard</option>
+      <option value="Giant Octopus">Giant Octopus</option>
+      <option value="Giant Owl">Giant Owl</option>
+      <option value="Giant Poisonous Snake">Giant Poisonous Snake</option>
+      <option value="Giant Rat">Giant Rat</option>
+      <option value="Giant Rat (Diseased)">Giant Rat (Diseased)</option>
+      <option value="Giant Scorpion">Giant Scorpion</option>
+      <option value="Giant Sea Horse">Giant Sea Horse</option>
+      <option value="Giant Shark">Giant Shark</option>
+      <option value="Giant Spider">Giant Spider</option>
+      <option value="Giant Toad">Giant Toad</option>
+      <option value="Giant Vulture">Giant Vulture</option>
+      <option value="Giant Wasp">Giant Wasp</option>
+      <option value="Giant Weasel">Giant Weasel</option>
+      <option value="Giant Wolf Spider">Giant Wolf Spider</option>
+      <option value="Gibbering Mouther">Gibbering Mouther</option>
+      <option value="Glabrezu">Glabrezu</option>
+      <option value="Gladiator">Gladiator</option>
+      <option value="Gnoll">Gnoll</option>
+      <option value="Goat">Goat</option>
+      <option value="Goblin">Goblin</option>
+      <option value="Gold Dragon Wyrmling">Gold Dragon Wyrmling</option>
+      <option value="Gorgon">Gorgon</option>
+      <option value="Gray Ooze">Gray Ooze</option>
+      <option value="Green Dragon Wyrmling">Green Dragon Wyrmling</option>
+      <option value="Green Hag">Green Hag</option>
+      <option value="Grick">Grick</option>
+      <option value="Griffon">Griffon</option>
+      <option value="Grimlock">Grimlock</option>
+      <option value="Guard">Guard</option>
+      <option value="Guardian Naga">Guardian Naga</option>
+      <option value="Gynosphinx">Gynosphinx</option>
+      <option value="Half-Red Dragon Veteran">Half-Red Dragon Veteran</option>
+      <option value="Harpy">Harpy</option>
+      <option value="Hawk">Hawk</option>
+      <option value="Hell Hound">Hell Hound</option>
+      <option value="Hezrou">Hezrou</option>
+      <option value="Hill Giant">Hill Giant</option>
+      <option value="Hippogriff">Hippogriff</option>
+      <option value="Hobgoblin">Hobgoblin</option>
+      <option value="Homunculus">Homunculus</option>
+      <option value="Horned Devil">Horned Devil</option>
+      <option value="Hunter Shark">Hunter Shark</option>
+      <option value="Hydra">Hydra</option>
+      <option value="Hyena">Hyena</option>
+      <option value="Ice Devil">Ice Devil</option>
+      <option value="Ice Mephit">Ice Mephit</option>
+      <option value="Imp">Imp</option>
+      <option value="Invisible Stalker">Invisible Stalker</option>
+      <option value="Iron Golem">Iron Golem</option>
+      <option value="Jackal">Jackal</option>
+      <option value="Killer Whale">Killer Whale</option>
+      <option value="Knight">Knight</option>
+      <option value="Kobold">Kobold</option>
+      <option value="Kraken">Kraken</option>
+      <option value="Lamia">Lamia</option>
+      <option value="Lemure">Lemure</option>
+      <option value="Lich">Lich</option>
+      <option value="Lion">Lion</option>
+      <option value="Lizard">Lizard</option>
+      <option value="Lizardfolk">Lizardfolk</option>
+      <option value="Mage">Mage</option>
+      <option value="Magma Mephit">Magma Mephit</option>
+      <option value="Magmin">Magmin</option>
+      <option value="Mammoth">Mammoth</option>
+      <option value="Manticore">Manticore</option>
+      <option value="Marilith">Marilith</option>
+      <option value="Mastiff">Mastiff</option>
+      <option value="Medusa">Medusa</option>
+      <option value="Merfolk">Merfolk</option>
+      <option value="Merrow">Merrow</option>
+      <option value="Mimic">Mimic</option>
+      <option value="Minotaur">Minotaur</option>
+      <option value="Minotaur Skeleton">Minotaur Skeleton</option>
+      <option value="Mule">Mule</option>
+      <option value="Mummy">Mummy</option>
+      <option value="Mummy Lord">Mummy Lord</option>
+      <option value="Nalfeshnee">Nalfeshnee</option>
+      <option value="Night Hag">Night Hag</option>
+      <option value="Nightmare">Nightmare</option>
+      <option value="Noble">Noble</option>
+      <option value="Ochre Jelly">Ochre Jelly</option>
+      <option value="Octopus">Octopus</option>
+      <option value="Ogre">Ogre</option>
+      <option value="Ogre Zombie">Ogre Zombie</option>
+      <option value="Oni">Oni</option>
+      <option value="Orc">Orc</option>
+      <option value="Otyugh">Otyugh</option>
+      <option value="Owl">Owl</option>
+      <option value="Owlbear">Owlbear</option>
+      <option value="Panther">Panther</option>
+      <option value="Pegasus">Pegasus</option>
+      <option value="Phase Spider">Phase Spider</option>
+      <option value="Pit Fiend">Pit Fiend</option>
+      <option value="Planetar">Planetar</option>
+      <option value="Plesiosaurus">Plesiosaurus</option>
+      <option value="Poisonous Snake">Poisonous Snake</option>
+      <option value="Polar Bear">Polar Bear</option>
+      <option value="Pony">Pony</option>
+      <option value="Priest">Priest</option>
+      <option value="Pseudodragon">Pseudodragon</option>
+      <option value="Purple Worm">Purple Worm</option>
+      <option value="Quasit">Quasit</option>
+      <option value="Quipper">Quipper</option>
+      <option value="Rakshasa">Rakshasa</option>
+      <option value="Rat">Rat</option>
+      <option value="Raven">Raven</option>
+      <option value="Red Dragon Wyrmling">Red Dragon Wyrmling</option>
+      <option value="Reef Shark">Reef Shark</option>
+      <option value="Remorhaz">Remorhaz</option>
+      <option value="Rhinoceros">Rhinoceros</option>
+      <option value="Riding Horse">Riding Horse</option>
+      <option value="Roc">Roc</option>
+      <option value="Roper">Roper</option>
+      <option value="Rug of Smothering">Rug of Smothering</option>
+      <option value="Rust Monster">Rust Monster</option>
+      <option value="Saber-Toothed Tiger">Saber-Toothed Tiger</option>
+      <option value="Sahuagin">Sahuagin</option>
+      <option value="Salamander">Salamander</option>
+      <option value="Satyr">Satyr</option>
+      <option value="Scorpion">Scorpion</option>
+      <option value="Scout">Scout</option>
+      <option value="Sea Hag">Sea Hag</option>
+      <option value="Sea Horse">Sea Horse</option>
+      <option value="Shadow">Shadow</option>
+      <option value="Shambling Mound">Shambling Mound</option>
+      <option value="Shield Guardian">Shield Guardian</option>
+      <option value="Shrieker">Shrieker</option>
+      <option value="Silver Dragon Wyrmling">Silver Dragon Wyrmling</option>
+      <option value="Skeleton">Skeleton</option>
+      <option value="Solar">Solar</option>
+      <option value="Specter">Specter</option>
+      <option value="Spider">Spider</option>
+      <option value="Spirit Naga">Spirit Naga</option>
+      <option value="Sprite">Sprite</option>
+      <option value="Spy">Spy</option>
+      <option value="Steam Mephit">Steam Mephit</option>
+      <option value="Stirge">Stirge</option>
+      <option value="Stone Giant">Stone Giant</option>
+      <option value="Stone Golem">Stone Golem</option>
+      <option value="Storm Giant">Storm Giant</option>
+      <option value="Succubus/Incubus">Succubus/Incubus</option>
+      <option value="Swarm of Bats">Swarm of Bats</option>
+      <option value="Swarm of Beetles">Swarm of Beetles</option>
+      <option value="Swarm of Centipedes">Swarm of Centipedes</option>
+      <option value="Swarm of Insects">Swarm of Insects</option>
+      <option value="Swarm of Poisonous Snakes">Swarm of Poisonous Snakes</option>
+      <option value="Swarm of Quippers">Swarm of Quippers</option>
+      <option value="Swarm of Rats">Swarm of Rats</option>
+      <option value="Swarm of Ravens">Swarm of Ravens</option>
+      <option value="Swarm of Spiders">Swarm of Spiders</option>
+      <option value="Swarm of Wasps">Swarm of Wasps</option>
+      <option value="Tarrasque">Tarrasque</option>
+      <option value="Thug">Thug</option>
+      <option value="Tiger">Tiger</option>
+      <option value="Treant">Treant</option>
+      <option value="Tribal Warrior">Tribal Warrior</option>
+      <option value="Triceratops">Triceratops</option>
+      <option value="Troll">Troll</option>
+      <option value="Tyrannosaurus Rex">Tyrannosaurus Rex</option>
+      <option value="Unicorn">Unicorn</option>
+      <option value="Vampire">Vampire</option>
+      <option value="Vampire Spawn">Vampire Spawn</option>
+      <option value="Veteran">Veteran</option>
+      <option value="Violet Fungus">Violet Fungus</option>
+      <option value="Vrock">Vrock</option>
+      <option value="Vulture">Vulture</option>
+      <option value="Warhorse">Warhorse</option>
+      <option value="Warhorse Skeleton">Warhorse Skeleton</option>
+      <option value="Water Elemental">Water Elemental</option>
+      <option value="Weasel">Weasel</option>
+      <option value="Werebear">Werebear</option>
+      <option value="Wereboar">Wereboar</option>
+      <option value="Wererat">Wererat</option>
+      <option value="Weretiger">Weretiger</option>
+      <option value="Werewolf">Werewolf</option>
+      <option value="White Dragon Wyrmling">White Dragon Wyrmling</option>
+      <option value="Wight">Wight</option>
+      <option value="Will-o'-Wisp">Will-o'-Wisp</option>
+      <option value="Winter Wolf">Winter Wolf</option>
+      <option value="Wolf">Wolf</option>
+      <option value="Worg">Worg</option>
+      <option value="Wraith">Wraith</option>
+      <option value="Wyvern">Wyvern</option>
+      <option value="Xorn">Xorn</option>
+      <option value="Young Black Dragon">Young Black Dragon</option>
+      <option value="Young Blue Dragon">Young Blue Dragon</option>
+      <option value="Young Brass Dragon">Young Brass Dragon</option>
+      <option value="Young Bronze Dragon">Young Bronze Dragon</option>
+      <option value="Young Copper Dragon">Young Copper Dragon</option>
+      <option value="Young Gold Dragon">Young Gold Dragon</option>
+      <option value="Young Green Dragon">Young Green Dragon</option>
+      <option value="Young Red Dragon">Young Red Dragon</option>
+      <option value="Young Silver Dragon">Young Silver Dragon</option>
+      <option value="Young White Dragon">Young White Dragon</option>
+      <option value="Zombie">Zombie</option>
+    </select>
+    <!--
 	<select id="monsters_number">
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -458,203 +569,106 @@
 		<option value="10">10</option>
 	</select>
 -->
-	<button type="submit">Generate</button>
-	<button type="button" id="random_monster">Random monster!</button>
-</form>
+    <button type="submit">Generate</button>
+    <button type="button" id="random_monster">Random monster!</button>
+  </form>
 </div>
 <h2><i class="fas fa-dice"></i> Roll dice</h2>
-<p>Accepts all standard and a number of rarer dice codes. <a href="#" id="toggle-dice-documentation">Click to show documentation</a>.</p>
+<p>Accepts all standard and a number of rarer dice codes. <a href="#" id="toggle-dice-documentation">Click to show
+    documentation</a>.</p>
 <div id="dice-documentation">
-<p>Accepted formats:</p>
-    <ul>
-      <li>
-        <code>d6</code> or <code>1d6</code> <small>(A 6 sided die)</small>
-      </li>
+  <p>Accepted formats:</p>
+  <ul>
+    <li>
+      <code>d6</code> or <code>1d6</code> <small>(A 6 sided die)</small>
+    </li>
 
-      <li>
-        <code>2d6</code> <small>(Two 6 sided dice)</small>
-      </li>
+    <li>
+      <code>2d6</code> <small>(Two 6 sided dice)</small>
+    </li>
 
-      <li>
-        <code>1d6+4</code> <small>(Roll a 6 sided dice and add 4 to the result)</small>
-      </li>
+    <li>
+      <code>1d6+4</code> <small>(Roll a 6 sided dice and add 4 to the result)</small>
+    </li>
 
-      <li>
-        <code>2d10*4+1d20</code> <small>(Roll two 10 sided dice multiply by four, and roll one 20 sided die)</small>
-      </li>
+    <li>
+      <code>2d10*4+1d20</code> <small>(Roll two 10 sided dice multiply by four, and roll one 20 sided die)</small>
+    </li>
 
-      <li>
-        <code>2d10+4+2d20-L</code> <small>(Roll two 10 sided dice add four, and roll two 20 sided die, taking away the lowest of the two)</small>
-      </li>
+    <li>
+      <code>2d10+4+2d20-L</code> <small>(Roll two 10 sided dice add four, and roll two 20 sided die, taking away the
+        lowest of the two)</small>
+    </li>
 
-      <li>
-        <code>d%</code> <small>(A percentile die - equivalent to <code>d100</code>)</small>
-      </li>
+    <li>
+      <code>d%</code> <small>(A percentile die - equivalent to <code>d100</code>)</small>
+    </li>
 
-      <li>
-        <code>dF</code> or <code>dF.2</code> <small>(A standard fudge dice - 2 thirds of each symbol)</small>
-      </li>
+    <li>
+      <code>dF</code> or <code>dF.2</code> <small>(A standard fudge dice - 2 thirds of each symbol)</small>
+    </li>
 
-      <li>
-        <code>dF.1</code> <small>(A non-standard fudge dice - 1 positive, 1 negative, 4 blank)</small>
-      </li>
+    <li>
+      <code>dF.1</code> <small>(A non-standard fudge dice - 1 positive, 1 negative, 4 blank)</small>
+    </li>
 
-      <li>
-        <code>2d6!</code> <small>(Exploding dice - two 6 sided die, rolling again for each roll of the maximum value)</small>
-      </li>
+    <li>
+      <code>2d6!</code> <small>(Exploding dice - two 6 sided die, rolling again for each roll of the maximum
+        value)</small>
+    </li>
 
-      <li>
-        <code>2d6!!</code> <small>(Exploding &amp; compounding dice - like exploding, but adding together into single roll)</small>
-      </li>
+    <li>
+      <code>2d6!!</code> <small>(Exploding &amp; compounding dice - like exploding, but adding together into single
+        roll)</small>
+    </li>
 
-      <li>
-        <code>2d6!p</code> <small>(Penetrating dice - like exploding, but subtract 1 from each consecutive roll)</small>
-      </li>
+    <li>
+      <code>2d6!p</code> <small>(Penetrating dice - like exploding, but subtract 1 from each consecutive roll)</small>
+    </li>
 
-      <li>
-        <code>2d6!!p</code> <small>(Penetrating &amp; compounding dice - like exploding &amp; compounding, but subtract 1 from each consecutive roll)</small>
-      </li>
+    <li>
+      <code>2d6!!p</code> <small>(Penetrating &amp; compounding dice - like exploding &amp; compounding, but subtract 1
+        from each consecutive roll)</small>
+    </li>
 
-      <li>
-        <code>2d6!>=4</code> <small>(Exploding dice, but only if you roll a 4 or greater - Also usable with compounding and penetrating dice)</small>
-      </li>
+    <li>
+      <code>2d6!>=4</code> <small>(Exploding dice, but only if you roll a 4 or greater - Also usable with compounding
+        and penetrating dice)</small>
+    </li>
 
-      <li>
-        <code>2d6>4</code>
-        <small>
-          (Dice pool - anything greater than a 4 is a success. Count the number of successes as the total)
-        </small>
-      </li>
-    </ul>
+    <li>
+      <code>2d6>4</code>
+      <small>
+        (Dice pool - anything greater than a 4 is a success. Count the number of successes as the total)
+      </small>
+    </li>
+  </ul>
 
-    <p>
-      The following arithmetic operators can be used: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>
-    </p>
+  <p>
+    The following arithmetic operators can be used: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>
+  </p>
 
-    <p>
-      The following comparative operators can be used for compare points: <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>
-    </p>
-		<p>Documentation text from <a href="http://rpg.greenimp.co.uk/dice-roller/">RPG Die Roller</a>.</p>
+  <p>
+    The following comparative operators can be used for compare points: <code>=</code>, <code>&lt;</code>,
+    <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!=</code>
+  </p>
+  <p>Documentation text from <a href="http://rpg.greenimp.co.uk/dice-roller/">RPG Die Roller</a>.</p>
 </div>
 <form id="roll-dice">
-  <input id="dice-code" type="text" placeholder="Dice code" value="1d20" >
+  <input id="dice-code" type="text" placeholder="Dice code" value="1d20">
   <button type="submit">Roll</button>
 </form>
 <div id="dice-result"><em>Roll some dice!</em></div>
-<h2><i class="fas fa-map"></i> Map</h2>
-<div id="map-section">
-	<form id="map-tools-form">
-		<div id="map-controls">
-		<label>
-			<strong>Tools</strong>
-		</label>
-		<label>
-			<input type="radio" id="black" name="tool" data-tool-type="map" checked />
-			<img src="/tinydungeon/images/wall-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="white" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/clear-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="door" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/door-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="stairs" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/stairs-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="column" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/column-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="chest" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/chest-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="statue" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/statue-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="terrain" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/terrain-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="rocks" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/rocks-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="box" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/box-icon.gif">
-		</label>
-		<label>
-			<input type="radio" id="secret" name="tool" data-tool-type="map" />
-			<img src="/tinydungeon/images/secret-icon.gif">
-		</label>
-		<button type="button" id="clear-map">Clear map</button>
-		</div>
-		<div id="map-participant-controls">
-		<label>
-			<strong>Participants</strong>
-		</label>
-		</div>
-	</form>
-	<div id="map-grid-container">
-		<div id="map-grid">
-			<div class="grid-row row-0">
-				<div class="column-index"></div>
-				<div class="column-index">A</div>
-				<div class="column-index">B</div>
-				<div class="column-index">C</div>
-				<div class="column-index">D</div>
-				<div class="column-index">E</div>
-				<div class="column-index">F</div>
-				<div class="column-index">G</div>
-				<div class="column-index">H</div>
-				<div class="column-index">I</div>
-				<div class="column-index">J</div>
-				<div class="column-index">K</div>
-				<div class="column-index">L</div>
-				<div class="column-index">M</div>
-				<div class="column-index">N</div>
-				<div class="column-index">O</div>
-				<div class="column-index">P</div>
-				<div class="column-index">Q</div>
-				<div class="column-index">R</div>
-				<div class="column-index">S</div>
-				<div class="column-index">T</div>
-				<div class="column-index">U</div>
-				<div class="column-index">V</div>
-				<div class="column-index">W</div>
-				<div class="column-index">X</div>
-				<div class="column-index">Y</div>
-				<div class="column-index">Z</div>
-				<div class="column-index">AA</div>
-				<div class="column-index">AB</div>
-				<div class="column-index">AC</div>
-				<div class="column-index">AD</div>
-				<div class="column-index">AE</div>
-				<div class="column-index">AF</div>
-			</div>
-			{{#each room.map.cells}}
-				<div class="grid-row row-{{math @index '+' 1}}">
-					<div class="row-index">{{math @index '+' 1}}</div>
-					{{#each this}}
-						<div class="grid-cell cell-{{math @index '+' 1}} color-{{this.color}}">
-							{{{pog @../index @index ../../room.map.pogs}}}
-						</div>
-					{{/each}}
-				</div>
-			{{/each}}
-		</div>
-	</div>
-</div>
 <hr>
 <h2>Useful links</h2>
-<a href="https://crobi.github.io/dnd5e-quickref/preview/quickref.html" target="_blank">D&amp;D 5e quick reference</a> | <a href="https://donjon.bin.sh/" target="_blank">donjon</a>
+<a href="https://crobi.github.io/dnd5e-quickref/preview/quickref.html" target="_blank">D&amp;D 5e quick reference</a> |
+<a href="https://donjon.bin.sh/" target="_blank">donjon</a>
 <hr>
-<p><a href="/tinydungeon/download_map?room_id={{room.id}}&room_name={{room.name}}"><i class="fas fa-download"></i> Download map</a> | <a href="/tinydungeon/download_participants?room_id={{room.id}}&room_name={{room.name}}"><i class="fas fa-download"></i> Download participants</a> | <a href="/tinydungeon/delete_room?room_id={{room.id}}" onclick="return confirm('Are you sure you want to delete this dungeon?');"><i class="fas fa-exclamation-circle"></i> Delete dungeon</a></p>
+<p><a href="/download_map?room_id={{room.id}}&room_name={{room.name}}"><i class="fas fa-download"></i>
+    Download map</a> | <a href="/download_participants?room_id={{room.id}}&room_name={{room.name}}"><i
+      class="fas fa-download"></i> Download participants</a> | <a href="/delete_room?room_id={{room.id}}"
+    onclick="return confirm('Are you sure you want to delete this dungeon?');"><i class="fas fa-exclamation-circle"></i>
+    Delete dungeon</a></p>
 {{/inline}}
 {{#*inline "scripts-block"}}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -668,140 +682,134 @@
 //}))
 </script>
 <script>
-$(".color-picker").spectrum({
+  $(".color-picker").spectrum({
     showPaletteOnly: true,
-    showPalette:true,
+    showPalette: true,
     color: $(this).attr("data-color"),
     palette: [
-        ['rgb(255, 0, 77);', 'rgb(255, 163, 0);', 'rgb(255, 236, 39);',
+      ['rgb(255, 0, 77);', 'rgb(255, 163, 0);', 'rgb(255, 236, 39);',
         'rgb(0, 228, 54);'],
-				['rgb(41, 173, 255);', 'rgb(131, 118, 156);', 'rgb(255, 119, 168);', 'rgb(255, 204, 170);'],
-				['rgb(29, 43, 83);', 'rgb(126, 37, 83);',
-				'rgb(0, 135, 81);', 'rgb(171, 82, 54);'],
-				['rgb(0, 0, 0);', 'rgb(95, 87, 79);',
-				'rgb(194, 195, 199);', 'rgb(255, 241, 232);']
+      ['rgb(41, 173, 255);', 'rgb(131, 118, 156);', 'rgb(255, 119, 168);', 'rgb(255, 204, 170);'],
+      ['rgb(29, 43, 83);', 'rgb(126, 37, 83);',
+        'rgb(0, 135, 81);', 'rgb(171, 82, 54);'],
+      ['rgb(0, 0, 0);', 'rgb(95, 87, 79);',
+        'rgb(194, 195, 199);', 'rgb(255, 241, 232);']
     ]
-});
+  });
 
-	
-var pusher = new Pusher('b7fdcc5991e812a9a79e', {
-      cluster: 'eu',
-      encrypted: true
+
+  var pusher = new Pusher('b7fdcc5991e812a9a79e', {
+    cluster: 'eu',
+    encrypted: true
+  });
+  var socketId;
+  // retrieve the socket ID on successful connection
+  pusher.connection.bind('connected', function () {
+    socketId = pusher.connection.socket_id;
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.params = {
+      "room": "{{room.name}}",
+      "socket": socketId
+    };
+    $('.name, .init, .ac, .hp, [class*=" stats-"]').editable({
+      clear: false
     });
-			var socketId;
-			// retrieve the socket ID on successful connection
-			pusher.connection.bind('connected', function() {
-					socketId = pusher.connection.socket_id;
-				$.fn.editable.defaults.mode = 'inline';
-				$.fn.editable.defaults.params = {
-	"room": "{{room.name}}",
-	"socket": socketId
-	};
-				$('.name, .init, .ac, .hp, [class*=" stats-"]').editable({
-			clear: false
-	});
-	$('.chp').editable({
-			clear: false,
-			inputclass: "chp-edit-field"
-	});
-	$('.notes').editable({
-			placeholder: "Make a note",
-			emptytext: "Make a note",
-			clear: false,
-			inputclass: "notes-edit-field"
-	});
-			});
+    $('.chp').editable({
+      clear: false,
+      inputclass: "chp-edit-field"
+    });
+    $('.notes').editable({
+      placeholder: "Make a note",
+      emptytext: "Make a note",
+      clear: false,
+      inputclass: "notes-edit-field"
+    });
+  });
 
 
-        var channel = pusher.subscribe('dungeon-events');
-//$.fn.editable.defaults.mode = 'inline';
-//$.fn.editable.defaults.params = {
-//	"room": "{{room.name}}"
-//	};
-$(document).ready(function() {
- 
-//	var refreshTable = setInterval(function() {
-//    $("#members-list").load(window.location.href+" #members-list>*","");
-//		console.log("Loaded.")
-//  }, 5000);
-//	$('#members-list').mouseover(function(){
-//    clearInterval(refreshTable);
-// }).mouseout(function(){
-//    refreshTable = setInterval(function() {
-//    $("#members-list").load(window.location.href+" #members-list>*","");
-//		console.log("Loaded.")
-//  }, 5000);
-// })
-	
-	$('.notes').on('shown', function(e, editable) {
-    $(".notes-edit-field").keypress(function (e) {
-			if(e.which == 13 && !e.shiftKey) {        
-					$(this).closest("form").submit();
-					e.preventDefault();
-					return false;
-			}
-		});
-	});
-	$('.chp').on('save', function(e, params) {
-			const id = params.response;
-			const statbar = $(".chp[data-pk='"+id+"']").parent();
-			const total_hp = $(".hp[data-pk='"+id+"']").text();
-			const current_hp = params.newValue;
-			const hp_ratio = (current_hp/total_hp)*100;
-			statbar.animate({width: hp_ratio+"%"});
-						if (hp_ratio < 33)
-						{
-//								if (current_hp < 2){
-//										$(this).children().css('color', 'black');
-//								}
-							statbar.css('background-color', 'red');
-							statbar.css('border-color', '#ffa5a5');
-						}
-						else if (hp_ratio > 33 && hp_ratio <= 66)
-						{
-							statbar.css('background-color', 'orange');  
-							statbar.css('border-color', '#dcd8b6');
-						}
-						else
-						{
-							statbar.css('background-color', '#11a911'); //Green
-							statbar.css('border-color', '#7bdc7b');
-						}
-	});
-	$('.hp').on('save', function(e, params) {
-			const id = params.response;
-			const statbar = $(".chp[data-pk='"+id+"']").parent();
-			const current_hp = $(".chp[data-pk='"+id+"']").text();
-			const new_total_hp = params.newValue;
-			const hp_ratio = (current_hp/new_total_hp)*100;
-			statbar.animate({width: hp_ratio+"%"});
-						if (hp_ratio < 33)
-						{
-//								if (current_hp < 2){
-//										$(this).children().css('color', 'black');
-//								}
-							statbar.css('background-color', 'red');
-							statbar.css('border-color', '#ffa5a5');
-						}
-						else if (hp_ratio > 33 && hp_ratio <= 66)
-						{
-							statbar.css('background-color', 'orange');  
-							statbar.css('border-color', '#dcd8b6');
-						}
-						else
-						{
-							statbar.css('background-color', '#11a911'); //Green
-							statbar.css('border-color', '#7bdc7b');
-						}
-	});
-});
+  var channel = pusher.subscribe('dungeon-events');
+  //$.fn.editable.defaults.mode = 'inline';
+  //$.fn.editable.defaults.params = {
+  //	"room": "{{room.name}}"
+  //	};
+  $(document).ready(function () {
+
+    //	var refreshTable = setInterval(function() {
+    //    $("#members-list").load(window.location.href+" #members-list>*","");
+    //		console.log("Loaded.")
+    //  }, 5000);
+    //	$('#members-list').mouseover(function(){
+    //    clearInterval(refreshTable);
+    // }).mouseout(function(){
+    //    refreshTable = setInterval(function() {
+    //    $("#members-list").load(window.location.href+" #members-list>*","");
+    //		console.log("Loaded.")
+    //  }, 5000);
+    // })
+
+    $('.notes').on('shown', function (e, editable) {
+      $(".notes-edit-field").keypress(function (e) {
+        if (e.which == 13 && !e.shiftKey) {
+          $(this).closest("form").submit();
+          e.preventDefault();
+          return false;
+        }
+      });
+    });
+    $('.chp').on('save', function (e, params) {
+      const id = params.response;
+      const statbar = $(".chp[data-pk='" + id + "']").parent();
+      const total_hp = $(".hp[data-pk='" + id + "']").text();
+      const current_hp = params.newValue;
+      const hp_ratio = (current_hp / total_hp) * 100;
+      statbar.animate({ width: hp_ratio + "%" });
+      if (hp_ratio < 33) {
+        //								if (current_hp < 2){
+        //										$(this).children().css('color', 'black');
+        //								}
+        statbar.css('background-color', 'red');
+        statbar.css('border-color', '#ffa5a5');
+      }
+      else if (hp_ratio > 33 && hp_ratio <= 66) {
+        statbar.css('background-color', 'orange');
+        statbar.css('border-color', '#dcd8b6');
+      }
+      else {
+        statbar.css('background-color', '#11a911'); //Green
+        statbar.css('border-color', '#7bdc7b');
+      }
+    });
+    $('.hp').on('save', function (e, params) {
+      const id = params.response;
+      const statbar = $(".chp[data-pk='" + id + "']").parent();
+      const current_hp = $(".chp[data-pk='" + id + "']").text();
+      const new_total_hp = params.newValue;
+      const hp_ratio = (current_hp / new_total_hp) * 100;
+      statbar.animate({ width: hp_ratio + "%" });
+      if (hp_ratio < 33) {
+        //								if (current_hp < 2){
+        //										$(this).children().css('color', 'black');
+        //								}
+        statbar.css('background-color', 'red');
+        statbar.css('border-color', '#ffa5a5');
+      }
+      else if (hp_ratio > 33 && hp_ratio <= 66) {
+        statbar.css('background-color', 'orange');
+        statbar.css('border-color', '#dcd8b6');
+      }
+      else {
+        statbar.css('background-color', '#11a911'); //Green
+        statbar.css('border-color', '#7bdc7b');
+      }
+    });
+  });
 </script>
 <!-- JavaScript -->
 <script type="text/javascript">
-    // Make sure to fire only when the DOM is ready
-    jQuery(document).ready(function($) {
-        $('#myselect').fontIconPicker(); // Load with default options
-    });
+  // Make sure to fire only when the DOM is ready
+  $(document).ready(function ($) {
+    $('#myselect').fontIconPicker(); // Load with default options
+  });
 </script> 
 {{/inline}}
-{{/base_layout}} 
+{{/base_layout}}
