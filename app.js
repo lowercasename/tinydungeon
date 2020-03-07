@@ -103,7 +103,9 @@ app.use(views(path.join(__dirname, '/views'), {
         }[operator];
       },
       cells: (context) => {
-        console.log(context);
+        let role = context.role ? context.role : 'player'
+        console.log(role)
+        let cell_color
         let html = '';
         let tableWidth = 64;
         let gridSize = Math.pow(tableWidth, 2)
@@ -111,14 +113,70 @@ app.use(views(path.join(__dirname, '/views'), {
           let row = Math.floor(i / tableWidth) + 1;
           let column = (i % tableWidth) + 1;
           let contextCell = context.find(cell => parseInt(cell.row) === row && parseInt(cell.column) === column)
-          let pogHtml = '';
+          let pogHtml = '', textHtml = '';
           if (contextCell && contextCell.pogs) {
-            contextCell.pogs.forEach(pog => {
-              pogHtml += `<span class="pog" data-id="${pog.pog_id}" style="width: ${pog.pog_size}; height: ${pog.pog_size};">${pog.pog_label}</span>`
-            })
+            function populatePogs() {
+              contextCell.pogs.forEach(pog => {
+                pogHtml += `<span class="pog" data-id="${pog.pog_id}" style="width: ${pog.pog_size}; height: ${pog.pog_size};">${pog.pog_label}</span>`
+              })
+            }
+            switch (role) {
+              case 'dm':
+                populatePogs()
+                break;
+              case 'player':
+                if (contextCell.fog)
+                  break;
+                populatePogs()
+                break;
+            }
           }
-          html += `<div title="Row ${row}, column ${column}" class="grid__cell" data-row="${row}" data-column="${column}" data-color="${contextCell ? contextCell.color : 'white'}" data-id="${contextCell ? contextCell.id : ''}">
+          if (contextCell && contextCell.text) {
+            // switch (role) {
+            //   case 'dm':
+            textHtml = `<div class="cell__text">${contextCell.text}</div>`
+            //   break;
+            // case 'player':
+            //   if (contextCell.fog)
+            //     break;
+            // textHtml = `<div class="cell__text">${contextCell.text}</div>`
+            // break;
+            // }
+          }
+          // function cellVisibility(cell) {
+          //   if (role === "dm") {
+          //     return (cell ? cell.color : 'white')
+          //   } else if (role === "player") {
+          //     if (cell) {
+          //       if (cell.fog) {
+          //         // This cell is covered in fog of war - show only that.
+          //         return 'fog'
+          //       } else if (!cell.override) {
+          //         // This cell is not covered in fog of war, and its true contents are visible to players
+          //         return cell.color
+          //       } else {
+          //         // This cell is not covered in fog of war, but its true contents are invisible to players
+          //         // switch (cell.color) {
+          //         //   case 'secret':
+          //         //     return 'black'
+          //         //   case 'pit':
+          //         //     return 'white'
+          //         //   case 'trap':
+          //         //     return 'white'
+          //         //   default:
+          //         //     return 'white'
+          //         // }
+          //         return cell.color
+          //       }
+          //     } else {
+          //       // This cell doesn't have any information
+          //       return 'fog'
+          //     }
+          //   }
+          // }
+          html += `<div title="Row ${row}, column ${column}" class="grid__cell" data-row="${row}" data-column="${column}" data-color="${contextCell ? contextCell.color : 'white'}" data-fog="${contextCell ? contextCell.fog : 'true'}" data-override="${contextCell ? contextCell.override : 'false'}">
             ${pogHtml ? pogHtml : ''}
+            ${textHtml}
           </div>`
         }
         return html;
@@ -138,6 +196,8 @@ router.get('/', index)
   .get('/delete_room', delete_room)
   .post('/generate_monster', generate_monster)
   .post('/edit_map', edit_map)
+  .post('/edit_cell_text', edit_map)
+  .post('/edit_cell_visibility', edit_map)
   .post('/edit_color', edit_color)
   .post('/clear_map', clear_map)
   .get('/download_map', koaBody(), download_map)
@@ -165,6 +225,8 @@ async function index(ctx) {
 
 async function show(ctx) {
   const name = ctx.params.name;
+  const role = ctx.query.role ? ctx.query.role : 'player'
+  const fog = ctx.query.show_fog === "true" ? true : false
   const room = db.get("rooms")
     .find({ name: name })
     .value();
@@ -182,8 +244,8 @@ async function show(ctx) {
     await ctx.render('404');
   }
   else {
-
-    await ctx.render('show', { room: room });
+    room.cells.role = role
+    await ctx.render('show', { room: room, is_dm: (role === "dm" ? true : false), show_fog: fog });
   }
 }
 
@@ -262,11 +324,12 @@ async function edit_color(ctx) {
 }
 
 async function edit_map(ctx) {
+  const socketId = ctx.query.socketId
   const room_id = ctx.query.room_id
   const map_row = ctx.query.map_row
   const map_column = ctx.query.map_column
-  const type = ctx.query.type
-  const color = ctx.query.color
+  const tool_type = ctx.query.tool_type
+  const tool_value = ctx.query.tool_value
   const pog_label = ctx.query.pog_label
   const pog_size = ctx.query.pog_size
   const size_array = {
@@ -277,30 +340,60 @@ async function edit_map(ctx) {
     "Huge": "69px",
     "Gargantuan": "94px"
   }
-  if (type == "map") {
+  let override = false;
+  const visible_tools = [
+    'black', 'white', 'corner_nw', 'corner_ne', 'corner_sw', 'corner_se',
+    'door_n', 'door_e', 'door_s', 'door_w',
+    'trapdoor_floor', 'trapdoor_ceiling',
+    'stairs_n', 'stairs_e', 'stairs_s', 'stairs_w',
+    'column', 'fountain', 'chest', 'statue', 'altar_v', 'altar_h',
+    'terrain', 'rocks'
+  ]
+  if (tool_type === "map") {
     const cells = db.get('rooms')
       .find({ id: room_id })
       .get('cells')
       .value()
 
+    // Check if tool is visible to non-DMs
+    if (!visible_tools.includes(tool_value)) {
+      switch (tool_value) {
+        case 'secret':
+          override = 'black'
+          break;
+        case 'pit':
+          override = 'white'
+          break;
+        case 'trap':
+          override = 'white'
+          break;
+        default:
+          override = 'black'
+          break;
+      }
+    }
+
     const cellIndex = cells.findIndex(cell => cell.row === map_row && cell.column === map_column)
     if (cellIndex > -1) {
-      cells[cellIndex].color = color
+      cells[cellIndex].color = tool_value
+      cells[cellIndex].override = override
     } else {
       cells.push({
         row: map_row,
         column: map_column,
-        color: color,
-        pogs: []
+        color: tool_value,
+        pogs: [],
+        fog: true,
+        override: override
       })
     }
     db.get('rooms')
       .find({ id: room_id })
       .assign({ cells })
       .write()
-  } else if (type === "participant") {
+  } else if (tool_type === "participant") {
     const pog = {
-      pog_id: color,
+      pog_id: tool_value,
       pog_label: pog_label,
       pog_size: size_array[pog_size]
     }
@@ -313,7 +406,7 @@ async function edit_map(ctx) {
     // Delete old pog
     cells.forEach(cell => {
       if (cell.pogs) {
-        cell.pogs = cell.pogs.filter(pog => { return pog.pog_id !== color })
+        cell.pogs = cell.pogs.filter(pog => { return pog.pog_id !== tool_value })
       }
     })
 
@@ -329,7 +422,9 @@ async function edit_map(ctx) {
       cells.push({
         row: map_row,
         column: map_column,
-        pogs: [pog]
+        pogs: [pog],
+        fog: true,
+        override: false
       })
     }
 
@@ -337,7 +432,7 @@ async function edit_map(ctx) {
       .find({ id: room_id })
       .assign({ cells })
       .write()
-  } else if (type === "delete_participant") {
+  } else if (tool_type === "delete_participant") {
     let cells = db.get('rooms')
       .find({ id: room_id })
       .get('cells')
@@ -346,7 +441,7 @@ async function edit_map(ctx) {
     // Delete old pog
     cells.forEach(cell => {
       if (cell.pogs) {
-        cell.pogs = cell.pogs.filter(pog => { return pog.pog_id !== color })
+        cell.pogs = cell.pogs.filter(pog => { return pog.pog_id !== tool_value })
       }
     })
 
@@ -354,9 +449,88 @@ async function edit_map(ctx) {
       .find({ id: room_id })
       .assign({ cells })
       .write()
+  } else if (tool_type === "text") {
+    const cells = db.get('rooms')
+      .find({ id: room_id })
+      .get('cells')
+      .value()
+
+    const cellIndex = cells.findIndex(cell => cell.row === map_row && cell.column === map_column)
+    if (cellIndex > -1) {
+      cells[cellIndex].text = tool_value
+    } else {
+      cells.push({
+        row: map_row,
+        column: map_column,
+        text: tool_value,
+        pogs: [],
+        fog: true,
+        override: false
+      })
+    }
+    db.get('rooms')
+      .find({ id: room_id })
+      .assign({ cells })
+      .write()
+  } else if (tool_type === "fog") {
+    let fog_value = (tool_value === "add" ? true : false)
+    console.log(fog_value)
+    const cells = db.get('rooms')
+      .find({ id: room_id })
+      .get('cells')
+      .value()
+
+    const cellIndex = cells.findIndex(cell => cell.row === map_row && cell.column === map_column)
+    if (cellIndex > -1) {
+      cells[cellIndex].fog = fog_value
+    } else {
+      cells.push({
+        row: map_row,
+        column: map_column,
+        pogs: [],
+        fog: fog_value,
+        override: false
+      })
+    }
+    db.get('rooms')
+      .find({ id: room_id })
+      .assign({ cells })
+      .write()
+  } else if (tool_type === "override") {
+    let override_value = (tool_value === "visible" ? false : tool_value)
+    const cells = db.get('rooms')
+      .find({ id: room_id })
+      .get('cells')
+      .value()
+
+    const cellIndex = cells.findIndex(cell => cell.row === map_row && cell.column === map_column)
+    if (cellIndex > -1) {
+      cells[cellIndex].override = override_value
+    } else {
+      cells.push({
+        row: map_row,
+        column: map_column,
+        fog: true,
+        override: override_value,
+        pogs: []
+      })
+    }
+    db.get('rooms')
+      .find({ id: room_id })
+      .assign({ cells })
+      .write()
   }
-  pusher.trigger('dungeon-events', 'map-edit', { room_id: room_id, map_row: map_row, map_column: map_column, type: type, color: color, pog_label: pog_label, pog_size: size_array[pog_size] });
-  //	ctx.response.body = member_id
+  console.log(socketId)
+  pusher.trigger('dungeon-events', 'map-edit', {
+    pusher: true,
+    room_id: room_id,
+    map_row: map_row,
+    map_column: map_column,
+    tool_type: tool_type,
+    tool_value: tool_value,
+    pog_label: pog_label,
+    pog_size_px: size_array[pog_size]
+  }, socketId);
   ctx.status = 200
 }
 

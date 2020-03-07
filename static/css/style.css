@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap');
 
 /* border-box ALL THE THINGS! */
 html {
   box-sizing: border-box;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 *,
@@ -13,7 +14,6 @@ html {
 }
 
 body {
-  font-family: "Muli", sans-serif;
 	display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -30,6 +30,7 @@ header {
 
 main {
   flex: 1;
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
 }
@@ -59,6 +60,58 @@ a:hover {
 		color: black;
 }
 
+code {
+  background: #e0e0e0;
+  font-family: inherit;
+  padding: 0px 2px;
+}
+
+input, button, select {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  max-width: 320px;
+}
+
+button {
+  background: white;
+  display: block;
+}
+
+input:focus, button:hover {
+  border-color: #96d1f0;
+}
+
+.select2-container {
+  margin-bottom: 10px !important;
+}
+
+/* Grid. */
+
+.row {
+  display: flex;
+}
+.row>.col {
+  flex: 1;
+  margin: 0 20px;
+}
+.row>.col:first-child {
+  margin-left: 0;
+}
+.row>.col:last-child {
+  margin-right: 0;
+}
+@media (max-width: 768px) {
+  .row {
+    display: block;
+  }
+  .row>.col {
+    margin: 0;
+  }
+}
+
 
 #map-grid {
   display: grid;
@@ -81,71 +134,146 @@ a:hover {
 	border: 1px dashed #2f86ba36;
 	cursor: pointer;
 	min-width: 25px;
-	min-height: 25px;
+  min-height: 25px;
+  transition: .15s;
 }
 
-/* .column-index, .row-index {
-	box-sizing: border-box;
-	height: 25px;
-	width: 25px;
-	border: 1px solid #d7e6f0;
-	text-align: center;
-	line-height: 25px;
-	font-size: smaller;
-	color: #666;
-	min-width: 25px;
-	min-height: 25px;
-} */
-
 #map-grid .grid__cell[data-color="white"] {
-	background-color: #fff;
+	background: #fff;
 }
 
 #map-grid .grid__cell[data-color="black"] {
-  /* background-color: #2f86ba; */
-  background-color: #96d1f0;
+  background: #96d1f0;
 }
 
-#map-grid .grid__cell[data-color="door"] {
-	background-color: #fff;
-	background: url(../images/door-icon.gif);
+#map-grid .grid__cell[data-color="door-n"] {
+
+	background: url(../images/door-icon-n.gif);
 }
-#map-grid .grid__cell[data-color="stairs"] {
-	background-color: #fff;
-	background: url(../images/stairs-icon.gif);
+#map-grid .grid__cell[data-color="door-e"] {
+
+	background: url(../images/door-icon-e.gif);
+}
+#map-grid .grid__cell[data-color="door-s"] {
+
+	background: url(../images/door-icon-s.gif);
+}
+#map-grid .grid__cell[data-color="door-w"] {
+
+	background: url(../images/door-icon-w.gif);
+}
+#map-grid .grid__cell[data-color="stairs-n"] {
+
+	background: url(../images/stairs-icon-n.gif);
+}
+#map-grid .grid__cell[data-color="stairs-e"] {
+
+	background: url(../images/stairs-icon-e.gif);
+}
+#map-grid .grid__cell[data-color="stairs-s"] {
+
+	background: url(../images/stairs-icon-s.gif);
+}
+#map-grid .grid__cell[data-color="stairs-w"] {
+
+	background: url(../images/stairs-icon-w.gif);
 }
 #map-grid .grid__cell[data-color="column"] {
-	background-color: #fff;
+
 	background: url(../images/column-icon.gif);
 }
 #map-grid .grid__cell[data-color="chest"] {
-	background-color: #fff;
+
 	background: url(../images/chest-icon.gif);
 }
 #map-grid .grid__cell[data-color="statue"] {
-	background-color: #fff;
+
 	background: url(../images/statue-icon.gif);
 }
 #map-grid .grid__cell[data-color="terrain"] {
-	background-color: #fff;
+
 	background: url(../images/terrain-icon.gif);
 }
 #map-grid .grid__cell[data-color="rocks"] {
-	background-color: #fff;
+
 	background: url(../images/rocks-icon.gif);
 }
-#map-grid .grid__cell[data-color="box"] {
-	background-color: #fff;
-	background: url(../images/box-icon.gif);
+#map-grid .grid__cell[data-color="altar-h"] {
+
+	background: url(../images/altar-h.gif);
+}
+#map-grid .grid__cell[data-color="altar-v"] {
+	background: url(../images/altar-v.gif);
 }
 #map-grid .grid__cell[data-color="secret"] {
-	background-color: #fff;
   background: url(../images/secret-icon.svg);
   background-size: contain;
 }
+#map-grid .grid__cell[data-color="trap"] {
+	background: url(../images/trap-icon.gif);
+}
+#map-grid .grid__cell[data-color="trapdoor-floor"] {
+	background: url(../images/trapdoor-floor.gif);
+}
+#map-grid .grid__cell[data-color="trapdoor-ceiling"] {
+	background: url(../images/trapdoor-ceiling.gif);
+}
+#map-grid .grid__cell[data-color="pit"] {
+	background: url(../images/pit-icon.gif);
+}
+#map-grid .grid__cell[data-color="fountain"] {
+	background: url(../images/fountain-icon.gif);
+}
+#map-grid .grid__cell[data-color="corner-nw"], input#corner-nw {
+  background: linear-gradient(to right bottom, #96d1f0 50%, #fff 50%);
+  border:transparent; /* This is to try and hack a CSS issue where the linear gradient makes the border vanish??) */
+}
+#map-grid .grid__cell[data-color="corner-ne"], input#corner-ne {
+  background: linear-gradient(to left bottom, #96d1f0 50%, #fff 50%);
+  border:transparent; /* This is to try and hack a CSS issue where the linear gradient makes the border vanish??) */
+}
+#map-grid .grid__cell[data-color="corner-se"], input#corner-se {
+  background: linear-gradient(to left top, #96d1f0 50%, #fff 50%);
+  border:transparent; /* This is to try and hack a CSS issue where the linear gradient makes the border vanish??) */
+}
+#map-grid .grid__cell[data-color="corner-sw"], input#corner-sw {
+  background: linear-gradient(to right top, #96d1f0 50%, #fff 50%);
+  border:transparent; /* This is to try and hack a CSS issue where the linear gradient makes the border vanish??) */
+}
 
+#map-grid.dm-view .grid__cell[data-override="white"]::after,
+#map-grid.dm-view .grid__cell[data-override="black"]::after {
+  content: '•';
+  color: red;
+  position: absolute;
+  top: -6px;
+  right: -1px;
+}
+
+#map-grid.player-view .grid__cell[data-override="white"] {
+ background: #fff; 
+}
+
+#map-grid.player-view .grid__cell[data-override="black"] {
+  background: #96d1f0; 
+}
+
+#map-grid.player-view .grid__cell[data-fog="true"] {
+	background: #aaa !important;
+}
+
+#map-grid.dm-view.show-fog .grid__cell[data-fog="true"]::before {
+  content: '';
+  background: #000;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  opacity: .075;
+}
+
+#map-grid.dm-view.show-fog .grid__cell[data-fog="true"]:hover::before,
 #map-grid .grid__cell:hover::before {
-  /* background: rgba(0,0,0,0.1); */
+  filter: grayscale(0);
   background: var(--before-background);
   width: 23px;
   height: 23px;
@@ -155,12 +283,28 @@ a:hover {
   opacity: .25;
 }
 
+.cell__text {
+  font-size: .8em;
+  position: absolute;
+  z-index: 200;
+  font-family: 'Muli', sans-serif;
+  width: 75px;
+  transform: translate(-33%);
+  line-height: 25px;
+  text-align: center;
+  color: #0e84c4;
+}
+
+#map-grid.player-view .grid__cell[data-fog="true"] .cell__text {
+  display: none;
+}
+
 #map-controls, #map-participant-controls {
 	margin-bottom: 0.5rem;
 	display: block;
 }
 
-#map-controls, #map-participant-controls {
+#map-controls, #map-participant-controls, #map-secondary-tools {
 	background: #eee;
 	padding: 5px;
 	margin: 10px 0;
@@ -171,8 +315,22 @@ a:hover {
 	flex-wrap: wrap;
 }
 
-#map-controls label, #map-participant-controls label {
-	padding-right: 0.25rem;
+.tool-group {
+  display: inline-grid;
+  grid-template-rows: 25px 25px;
+  grid-gap: 2px;
+  border-right: 1px solid #ccc;
+  margin-right: 5px;
+  padding-right: 5px;
+  grid-auto-flow: column;
+}
+
+#map-tools-form h3 {
+  margin-bottom: 0;
+}
+
+#map-controls label, #map-participant-controls label, #map-secondary-tools label {
+  padding-right: 0.25rem;
 }
 
 #map-controls label > input, #map-participant-controls label > input { /* HIDE RADIO */
@@ -184,9 +342,10 @@ a:hover {
   border:2px solid transparent;
   border-radius: 5px;
 }
-#map-controls label > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
+#map-controls label > input:checked + img,
+#map-secondary-tools input[type="radio"]:checked + .selector,
+#map-secondary-tools input[type="checkbox"]:checked + .selector { /* (RADIO CHECKED) IMAGE STYLES */
 	border: 2px solid orange;
-	border-radius: 3px;
 }
 
 #map-participant-controls label > input + .participant-color {
@@ -208,6 +367,36 @@ a:hover {
 
 #map-participant-controls label > input:checked + .participant-color {
 	border:2px solid black;
+}
+
+#map-secondary-tools input[type="radio"],
+#map-secondary-tools input[type="checkbox"] {
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+#map-secondary-tools input[type="radio"] + .selector,
+#map-secondary-tools input[type="checkbox"] + .selector {
+  min-width: 28px;
+  height: 28px;
+  cursor:pointer;
+  border:2px solid transparent;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 5px;
+}
+
+#map-secondary-tools button, #map-participant-controls button {
+  border: 2px solid transparent !important;
+  margin-bottom: 0;
+  padding: 0 5px;
+  height: 28px;
+  min-width: 28px;
+  width: auto !important;
+  cursor: pointer;
+}
+
+#map-secondary-tools button:hover, #map-participant-controls button:hover {
+  border: 2px solid orange !important;
 }
 
 #remove-pog {
@@ -322,18 +511,18 @@ td, th {
 
 .hpbar .editable-container {
   width: 98%;
-  position: absolute;
+  /* position: absolute;
   right: 0;
-  bottom: 9px;
+  bottom: 9px; */
 }
 
 .hpbarborder {
-		width: 100%;
-		background: #cccccc;
-		box-shadow: inset -1px 1px 1px rgba(0,0,0,0.2);
-		border-radius: 6px;
-		border: 2px solid #959595;
-	  margin-left: -2px;
+  width: 100%;
+  background: #cccccc;
+  box-shadow: inset -1px 1px 1px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  border: 2px solid #959595;
+  margin-left: -2px;
 }
 
 .notes-edit-field {
@@ -374,9 +563,9 @@ td, th {
 		color: white;
 		font-weight: bold;
     border-bottom: 0px;
-    position: absolute;
+    /* position: absolute;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%); */
     text-shadow: 0 0 3px rgba(0,0,0,0.7);
 }
 
@@ -415,18 +604,25 @@ hr {
 		display: none;
 }
 
-code {
-		background: #e0e0e0;
-		font-family: inherit;
-		padding: 0px 2px;
-}
-
 #dice-result, #dice-documentation {
 		background: #eee;
     padding: 5px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+#dice-result {
+  max-height: 200px;
+  overflow-x: auto;
+}
+
+#dice-result p {
+  margin-top: 0;
+}
+
+#dice-result p:last-child {
+  margin-bottom: 0;
 }
 
 /* 

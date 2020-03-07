@@ -1,5 +1,11 @@
 $(function () {
 
+  let socketId = null;
+  pusher.connection.bind('connected', function () {
+    socketId = pusher.connection.socket_id;
+  });
+
+  // Setup
   const directions = [
     0,
     90,
@@ -14,16 +20,12 @@ $(function () {
     "Huge": "69px",
     "Gargantuan": "94px"
   }
-  $('.grid__cell[data-color="rocks"]').each(function () {
-    let direction = directions[Math.floor(Math.random() * directions.length)]
-    $(this).css('transform', 'rotate(' + direction + 'deg)')
-  })
 
   $(".color-picker").on('change.spectrum', function (e, tinycolor) {
     room_id = $('input#room_id').val();
     member_id = $(this).attr("data-id");
     color = $(this).val();
-    console.log(member_id)
+    // console.log(member_id)
     $("input#" + member_id + " + .participant-color").css("background-color", color);
     $.post('/edit_color?' + $.param({ room_id: room_id, member_id: member_id, color: color }));
   });
@@ -42,6 +44,50 @@ $(function () {
     return false;
   });
   $('#monster_name').select2();
+
+  // Right-click context menu for map
+  $.contextMenu({
+    selector: '.grid__cell',
+    callback: function (key, options) {
+      // console.log(key);
+      // console.log(options);
+      if (key === "edit-text") {
+        editCellText(this)
+      }
+      if (key === "make-visible") {
+        editCellOverride(this, "visible")
+      }
+      if (key === "make-wall") {
+        editCellOverride(this, "black")
+      }
+      if (key === "make-floor") {
+        editCellOverride(this, "white")
+      }
+    },
+    items: {
+      "edit-text": { name: "Edit text", icon: "fas fa-text" },
+      "make-visible": { name: "Reveal cell to players", icon: "far fa-search" },
+      "make-wall": { name: "Display to players as wall", icon: "far fa-times-hexagon" },
+      "make-floor": { name: "Display to players as floor", icon: "far fa-times-hexagon" },
+      // "rotate-ccw": { name: "Rotate counter-clockwise", icon: "fas fa-undo" },
+      // "rotate-cw": { name: "Rotate clockwise", icon: "fas fa-redo" },
+      "sep1": "---------",
+      "quit": {
+        name: "Exit menu", icon: function () {
+          return 'context-menu-icon context-menu-icon-quit';
+        }
+      }
+    }
+  });
+
+  $("#show-fog-checkbox, #dm-view-checkbox").change(function () {
+    let show_fog = $("#show-fog-checkbox").is(':checked') ? 'true' : 'false'
+    let role = $("#dm-view-checkbox").is(':checked') ? 'dm' : 'player'
+    let path = window.location.pathname + '?role=' + role + '&show_fog=' + show_fog + ' #map-grid'
+    console.log(path)
+    $("#map-grid").load(path);
+  })
+
   $('form#add_member').submit(function (event) {
     event.preventDefault();
     room_name = $('input#room_name').val();
@@ -192,26 +238,99 @@ $(function () {
     }
   }
 
-  function editMap(room_id, map_row, map_column, type, color, pog_label, pog_color, pog_size) {
-    if ($('input#room_id').val() == room_id) {
-      let cell = $('.grid__cell[data-row="' + map_row + '"][data-column="' + map_column + '"]')
-      if (type == "map") {
-        cell.attr('data-color', color)
-        if (color === "rocks") {
-          let direction = directions[Math.floor(Math.random() * directions.length)]
-          cell.css('transform', 'rotate(' + direction + 'deg)')
+  function editCell(options) {
+    // Check if we're in the right room
+    if ($('input#room_id').val() === options.room_id) {
+      // console.log(options)
+      let cellElement = $('.grid__cell[data-row="' + options.map_row + '"][data-column="' + options.map_column + '"]')
+      if (options.tool_type === "map") {
+        let override = 'false';
+        cellElement.attr('data-color', options.tool_value)
+        switch (options.tool_value) {
+          case 'secret':
+            override = 'black'
+            break;
+          case 'pit':
+            override = 'white'
+            break;
+          case 'trap':
+            override = 'white'
+            break;
+          default:
+            override = 'false'
+            break;
         }
-      } else if (type == "participant") {
-        $(".pog[data-id='" + color + "']").remove();
-        cell.append("<span class='pog' data-id='" + color + "' style='background-color: " + pog_color + "; width: " + pog_size + "; height: " + pog_size + "'>" + pog_label + "</span>");
-        assignPogColor(color)
-      } else if (type === "delete_participant") {
-        $(".pog[data-id='" + color + "']").remove();
+        cellElement.attr('data-override', override)
       }
+      else if (options.tool_type == "participant") {
+        $(".pog[data-id='" + options.tool_value + "']").remove();
+        cellElement.append("<span class='pog' data-id='" + options.tool_value + "' style='width: " + options.pog_size_px + "; height: " + options.pog_size_px + "'>" + options.pog_label + "</span>");
+        assignPogColor(options.tool_value);
+        $('#remove-pog').prop('disabled', false)
+      } else if (options.tool_type === "delete_participant") {
+        $(".pog[data-id='" + options.color + "']").remove();
+      } else if (options.tool_type === "text") {
+        if (cellElement.find('.cell__text').length) {
+          cellElement.find('.cell__text').text(options.tool_value)
+        } else {
+          cellElement.append('<div class="cell__text">' + options.tool_value + '</div>');
+        }
+      } else if (options.tool_type === "override") {
+        cellElement.attr('data-override', options.tool_value)
+      } else if (options.tool_type === "fog") {
+        let fog_value = options.tool_value === 'add' ? 'true' : 'false'
+        cellElement.attr('data-fog', fog_value)
+      }
+      // Finally, run the server function, but only if we're the ones editing
+      if (!options.pusher) {
+        $.post('/edit_map?' + $.param({
+          socketId: socketId,
+          room_id: options.room_id,
+          map_row: options.map_row,
+          map_column: options.map_column,
+          tool_type: options.tool_type,
+          tool_value: options.tool_value,
+          pog_label: options.pog_label,
+          pog_color: options.pog_color,
+          pog_size: options.pog_size
+        }));
+      }
+    } else {
+      return false;
     }
   }
 
+  function editCellText(cell) {
+    let cellData = getCellData(cell)
+    let current_text = cell.find(".cell__text").text();
+    let new_text = window.prompt("Enter cell text:", current_text);
+    if (!new_text) {
+      new_text = '';
+    }
+    if (current_text) {
+      cell.find('.cell__text').text(new_text)
+    } else {
+      cell.append('<div class="cell__text">' + new_text + '</div>');
+    }
+    $.post('/edit_cell_text?' + $.param({
+      room_id: cellData.room_id,
+      map_row: cellData.map_row,
+      map_column: cellData.map_column,
+      tool_type: 'text',
+      tool_value: new_text
+    }));
+  }
 
+  function editCellOverride(cell, override_value) {
+    let cellData = getCellData(cell)
+    $.post('/edit_cell_visibility?' + $.param({
+      room_id: cellData.room_id,
+      map_row: cellData.map_row,
+      map_column: cellData.map_column,
+      tool_type: 'override',
+      tool_value: override_value
+    }));
+  }
 
   channel.bind('table-edit', function (data) {
     updateTable(data.room_name, data.member_id, data.changed_field, data.new_value);
@@ -224,7 +343,7 @@ $(function () {
     addRow(data.room_name);
   });
   channel.bind('map-edit', function (data) {
-    editMap(data.room_id, data.map_row, data.map_column, data.type, data.color, data.pog_label, data.pog_color, data.pog_size);
+    editCell(data);
   });
   channel.bind('color-edit', function (data) {
     editColor(data.room_id, data.member_id, data.color);
@@ -236,8 +355,9 @@ $(function () {
     event.preventDefault();
     var roller = new DiceRoller();
     var code = $('input#dice-code').val();
-    var result = roller.roll(code);
-    $("#dice-result").text(result);
+    var result = '<p>' + roller.roll(code) + '</p>';
+    $("#dice-result").find('.placeholder').remove();
+    $("#dice-result").prepend(result);
   })
   $(".hpbar").each(function (index) {
     const id = $(this).children("a").attr("data-pk");
@@ -264,50 +384,47 @@ $(function () {
 
   // Mapping
 
-  const cell = $('.grid__cell');
-
-  function changeCell(cell) {
+  function getCellData(cell) {
     const room_id = $('input#room_id').val();
     const tool_type = $("input[name='tool']:checked").attr("data-tool-type");
-    const tool = $("input[name='tool']:checked").attr("id");
+    const tool_value = $("input[name='tool']:checked").attr("id");
     const map_row = cell.data("row")
     const map_column = cell.data("column")
     const pog_label = $("input[name='tool']:checked").siblings(".participant-color").text();
     const pog_color = $("input[name='tool']:checked").siblings(".participant-color").css("background-color");
     const pog_size = $("input[name='tool']:checked").attr("data-tool-size");
     const pog_size_px = size_array[pog_size]
-    $.post('/edit_map?' + $.param({ room_id: room_id, map_row: map_row, map_column: map_column, type: tool_type, color: tool, pog_label: pog_label, pog_color: pog_color, pog_size: pog_size }));
-    if (tool_type == "map") {
-      cell.attr('data-color', tool);
-      if (tool === "rocks") {
-        let direction = directions[Math.floor(Math.random() * directions.length)]
-        cell.css('transform', 'rotate(' + direction + 'deg)')
-      }
-    }
-    else if (tool_type == "participant") {
-      $(".pog[data-id='" + tool + "']").remove();
-      cell.append("<span class='pog' data-id='" + tool + "' style='width: " + pog_size_px + "; height: " + pog_size_px + "'>" + pog_label + "</span>");
-      assignPogColor(tool);
-      $('#remove-pog').prop('disabled', false)
+    return {
+      cell: cell,
+      room_id: room_id,
+      map_row: map_row,
+      map_column: map_column,
+      tool_type: tool_type,
+      tool_value: tool_value,
+      pog_label: pog_label,
+      pog_color: pog_color,
+      pog_size: pog_size,
+      pog_size_px: pog_size_px
     }
   }
 
-  cell.mousedown(function (e) {
+
+  $(document).on('mousedown', '.grid__cell', function (e) {
     e.preventDefault()
     if (e.which === 1) {
-      changeCell($(this))
-      cell.mouseenter(function (e) {
+      editCell(getCellData($(this)))
+      $(document).on('mouseenter', '.grid__cell', function (e) {
         e.preventDefault()
-        changeCell($(this))
+        editCell(getCellData($(this)))
       })
     }
   })
-  $(document).mouseup(function () {
-    cell.off('mouseenter')
+  $(document).on('mouseup', '.grid__cell', function (e) {
+    $(document).off('mouseenter', '.grid__cell')
   })
 
   hover_counter = 0
-  cell.mouseover(function () {
+  $(document).on('mouseover', '.grid__cell', function () {
     if (hover_counter < 1) {
       const checkedTool = $("input[name='tool']:checked")
       if (checkedTool.data('tool-type') === "map") {
@@ -322,7 +439,7 @@ $(function () {
       hover_counter++
     }
   })
-  cell.mouseleave(function () {
+  $(document).on('mouseleave', '.grid__cell', function () {
     hover_counter = 0
     $(this).find('.pog-preview').remove()
     $(this).attr('style', '--before-background: "";');
