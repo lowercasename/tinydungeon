@@ -66,7 +66,7 @@ code {
   padding: 0px 2px;
 }
 
-input, button, select {
+input[type=text], input[type=number], button, select {
   border: 2px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -344,8 +344,25 @@ input:focus, button:hover {
 }
 #map-controls label > input:checked + img,
 #map-secondary-tools input[type="radio"]:checked + .selector,
-#map-secondary-tools input[type="checkbox"]:checked + .selector { /* (RADIO CHECKED) IMAGE STYLES */
+#map-secondary-tools input[type="checkbox"]:checked + .selector,
+#map-controls input[type="radio"]:checked + .selector,
+#map-controls input[type="checkbox"]:checked + .selector { /* (RADIO CHECKED) IMAGE STYLES */
 	border: 2px solid orange;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.button-group > * {
+  height: 28px;
+  margin-bottom: 5px;
+}
+
+.button-group > *:last-child {
+  margin-bottom: 0;
 }
 
 #map-participant-controls label > input + .participant-color {
@@ -370,12 +387,16 @@ input:focus, button:hover {
 }
 
 #map-secondary-tools input[type="radio"],
-#map-secondary-tools input[type="checkbox"] {
+#map-secondary-tools input[type="checkbox"],
+#map-controls input[type="radio"],
+#map-controls input[type="checkbox"] {
   visibility: hidden; /* Makes input not-clickable */
   position: absolute; /* Remove input from document flow */
 }
 #map-secondary-tools input[type="radio"] + .selector,
-#map-secondary-tools input[type="checkbox"] + .selector {
+#map-secondary-tools input[type="checkbox"] + .selector,
+#map-controls input[type="radio"] + .selector,
+#map-controls input[type="checkbox"] + .selector {
   min-width: 28px;
   height: 28px;
   cursor:pointer;
@@ -383,6 +404,7 @@ input:focus, button:hover {
   border-radius: 5px;
   background: #fff;
   padding: 0 5px;
+  line-height: 22px;
 }
 
 #map-secondary-tools button, #map-participant-controls button {
@@ -401,6 +423,10 @@ input:focus, button:hover {
 
 #remove-pog {
   order: 2;
+}
+
+#clear-map {
+  margin-left: 20px
 }
 
 .pog {

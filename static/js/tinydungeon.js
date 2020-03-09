@@ -80,12 +80,27 @@ $(function () {
     }
   });
 
-  $("#show-fog-checkbox, #dm-view-checkbox").change(function () {
+  function changeDisplay() {
     let show_fog = $("#show-fog-checkbox").is(':checked') ? 'true' : 'false'
     let role = $("#dm-view-checkbox").is(':checked') ? 'dm' : 'player'
     let path = window.location.pathname + '?role=' + role + '&show_fog=' + show_fog + ' #map-grid'
-    console.log(path)
-    $("#map-grid").load(path);
+    $("#map-grid-container").load(path, function () {
+      $(".pog").each(function () {
+        assignPogColor($(this).attr("data-id"));
+      })
+    });
+    if (role === 'dm') {
+      $('.dm-control').show();
+    } else {
+      $('.dm-control').hide();
+    }
+  }
+
+  changeDisplay()
+
+
+  $("#show-fog-checkbox, #dm-view-checkbox").change(function () {
+    changeDisplay()
   })
 
   $('form#add_member').submit(function (event) {
@@ -473,9 +488,5 @@ $(function () {
     var size = $(".toggle-row." + id).find(".stats-size").text();
     $("#map-participant-controls").append("<label><input type='radio' id='" + p + "' name='tool' data-tool-type='participant' data-tool-size='" + size + "'/><div class='participant-color' style='background-color:" + color + "'>" + label + "</div></label>");
   });
-
-  $(".pog").each(function () {
-    assignPogColor($(this).attr("data-id"));
-  })
 
 })

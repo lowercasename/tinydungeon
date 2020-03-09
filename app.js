@@ -342,11 +342,11 @@ async function edit_map(ctx) {
   }
   let override = false;
   const visible_tools = [
-    'black', 'white', 'corner_nw', 'corner_ne', 'corner_sw', 'corner_se',
-    'door_n', 'door_e', 'door_s', 'door_w',
-    'trapdoor_floor', 'trapdoor_ceiling',
-    'stairs_n', 'stairs_e', 'stairs_s', 'stairs_w',
-    'column', 'fountain', 'chest', 'statue', 'altar_v', 'altar_h',
+    'black', 'white', 'corner-nw', 'corner-ne', 'corner-sw', 'corner-se',
+    'door-n', 'door-e', 'door-s', 'door-w',
+    'trapdoor-floor', 'trapdoor-ceiling',
+    'stairs-n', 'stairs-e', 'stairs-s', 'stairs-w',
+    'column', 'fountain', 'chest', 'statue', 'altar-v', 'altar-h',
     'terrain', 'rocks'
   ]
   if (tool_type === "map") {
@@ -357,6 +357,8 @@ async function edit_map(ctx) {
 
     // Check if tool is visible to non-DMs
     if (!visible_tools.includes(tool_value)) {
+      console.log(tool_value)
+      console.log("Does not include")
       switch (tool_value) {
         case 'secret':
           override = 'black'
@@ -654,7 +656,7 @@ async function download_map(ctx) {
   const now = moment().format("DD-MM-YY");
   const map = db.get("rooms")
     .find({ id: room_id })
-    .get("map")
+    .get("cells")
     .cloneDeep()
     .value();
   ctx.body = map;

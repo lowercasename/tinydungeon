@@ -138,6 +138,16 @@
           <img src="/images/trap-icon.gif">
         </label>
       </div>
+      <div class="button-group">
+        <label class="dm-control">
+          <input type="radio" id="remove" name="tool" data-tool-type="fog" />
+          <div class="selector"><i class="fas fa-eye"></i> Reveal cells</div>
+        </label>
+        <label class="dm-control">
+          <input type="radio" id="add" name="tool" data-tool-type="fog" />
+          <div class="selector"><i class="fas fa-eye-slash"></i> Obscure cells</div>
+        </label>
+      </div>
     </div>
     <h3>Other tools</h3>
     <div id="map-secondary-tools">
@@ -145,19 +155,11 @@
         <input type="checkbox" id="dm-view-checkbox" name="dm-view" />
         <div class="selector"><i class="fas fa-key-skeleton"></i> View as DM</div>
       </label>
-      <label>
+      <label class="dm-control">
         <input type="checkbox" id="show-fog-checkbox" name="show-fog" />
         <div class="selector"><i class="fad fa-adjust"></i> Show obscured cells</div>
       </label>
-      <label>
-        <input type="radio" id="remove" name="tool" data-tool-type="fog" />
-        <div class="selector"><i class="fas fa-eye"></i> Reveal cells</div>
-      </label>
-      <label>
-        <input type="radio" id="add" name="tool" data-tool-type="fog" />
-        <div class="selector"><i class="fas fa-eye-slash"></i> Obscure cells</div>
-      </label>
-      <button type="button" id="clear-map"><i class="fas fa-trash"></i> Clear map</button>
+      <button type="button" id="clear-map" class="dm-control"><i class="fas fa-trash"></i> Clear map</button>
     </div>
     <h3>Participants</h3>
     <div id="map-participant-controls">
