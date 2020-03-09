@@ -104,11 +104,10 @@ app.use(views(path.join(__dirname, '/views'), {
       },
       cells: (context) => {
         let role = context.role ? context.role : 'player'
-        console.log(role)
-        let cell_color
-        let html = '';
-        let tableWidth = 64;
-        let gridSize = Math.pow(tableWidth, 2)
+        let html = ''
+        let tableWidth = 50
+        let tableHeight = 30
+        let gridSize = tableWidth * tableHeight
         for (var i = 0; i < gridSize; i++) {
           let row = Math.floor(i / tableWidth) + 1;
           let column = (i % tableWidth) + 1;
