@@ -259,7 +259,7 @@ input:focus, button:hover {
 }
 
 #map-grid.player-view .grid__cell[data-fog="true"] {
-	background: #aaa !important;
+	background: #aaa;
 }
 
 #map-grid.dm-view.show-fog .grid__cell[data-fog="true"]::before {
@@ -284,6 +284,7 @@ input:focus, button:hover {
 }
 
 .cell__text {
+  pointer-events: none;
   font-size: .8em;
   position: absolute;
   z-index: 200;

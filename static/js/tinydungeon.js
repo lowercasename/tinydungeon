@@ -65,10 +65,38 @@ $(function () {
       }
     },
     items: {
-      "edit-text": { name: "Edit text", icon: "fas fa-text" },
-      "make-visible": { name: "Reveal cell to players", icon: "far fa-search" },
-      "make-wall": { name: "Display to players as wall", icon: "far fa-times-hexagon" },
-      "make-floor": { name: "Display to players as floor", icon: "far fa-times-hexagon" },
+      "edit-text": {
+        name: "Edit text", icon: "fas fa-text", visible: function (key, opt) {
+          if (!$('#map-grid').hasClass('dm-view')) {
+            return false;
+          }
+          return true;
+        }
+      },
+      "make-visible": {
+        name: "Reveal cell to players", icon: "far fa-search", visible: function (key, opt) {
+          if (!$('#map-grid').hasClass('dm-view')) {
+            return false;
+          }
+          return true;
+        }
+      },
+      "make-wall": {
+        name: "Display to players as wall", icon: "far fa-times-hexagon", visible: function (key, opt) {
+          if (!$('#map-grid').hasClass('dm-view')) {
+            return false;
+          }
+          return true;
+        }
+      },
+      "make-floor": {
+        name: "Display to players as floor", icon: "far fa-times-hexagon", visible: function (key, opt) {
+          if (!$('#map-grid').hasClass('dm-view')) {
+            return false;
+          }
+          return true;
+        }
+      },
       // "rotate-ccw": { name: "Rotate counter-clockwise", icon: "fas fa-undo" },
       // "rotate-cw": { name: "Rotate clockwise", icon: "fas fa-redo" },
       "sep1": "---------",
