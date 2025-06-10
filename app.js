@@ -24,7 +24,7 @@ var roomName = moniker.generator([moniker.adjective, moniker.noun]);
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 
-const adapter = new FileSync('db.json')
+const adapter = new FileSync('data/db.json')
 const db = low(adapter)
 
 var Pusher = require('pusher');
